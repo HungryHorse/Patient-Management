@@ -28,9 +28,29 @@ public class Admin extends User
         accountManager.createDoctor(newDoctor);
     }
     
+    public void removeDoctor(Doctor doctor)
+    {
+        accountManager.removeDoctor(doctor);
+    }
+    
     public void addSecretary(AccountManagement accountManager, String password, String givenName, String surname, String adress, String dateOfBirth, String gender)
     {
         Secretary newSecretary = new Secretary(accountManager, password, givenName, surname, adress, dateOfBirth, gender);
         accountManager.createSecretary(newSecretary);
+    }
+    
+    public void removeSecretary(Secretary secretary)
+    {
+        accountManager.removeSecretary(secretary);
+    }
+    
+    public void veiwDoctorRatings(Doctor doctor)
+    {
+        
+    }
+    
+    public void giveFeedback(Doctor doctor)
+    {
+        
     }
 }

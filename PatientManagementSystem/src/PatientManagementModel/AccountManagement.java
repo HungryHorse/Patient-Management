@@ -27,7 +27,6 @@ public class AccountManagement
         instantiated = true; 
     }
     
-    
     public void requestAccount(Patient newPatient)
     {
         requestedAccountCreation.add(newPatient);
@@ -45,21 +44,37 @@ public class AccountManagement
         accounts.add(doctor);
     }
     
+    public void removeDoctor(Doctor doctor)
+    {
+        accounts.remove(doctor);
+    }
+    
     public void createSecretary(Secretary secretary)
     {
         accounts.add(secretary);
+    }
+    
+    public void removeSecretary(Secretary secretary)
+    {
+        accounts.remove(secretary);
     }
     
     public void createAdmin(Admin admin)
     {
         accounts.add(admin);
     }
+    
     public void requestAccountTermination(Patient patientToRemove)
     {
         requestedAccountTermination.add(patientToRemove);
     }
     
     public void removeAccount(Patient patientToRemove)
+    {
+        accounts.remove(patientToRemove);
+    }
+    
+    public void approveTermination(Patient patientToRemove)
     {
         requestedAccountTermination.remove(patientToRemove);
         accounts.remove(patientToRemove);
@@ -101,7 +116,7 @@ public class AccountManagement
         
         for(int i = 0; i < accounts.size(); i++)
         {
-            if(accounts.get(i).getUniqueID() == IDToFind)
+            if(accounts.get(i).getUniqueID().equals(IDToFind))
             {
                 userFound = accounts.get(i);
             }

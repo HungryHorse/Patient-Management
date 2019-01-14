@@ -5,6 +5,7 @@
  */
 package Users;
 import PatientManagementModel.*;
+import java.util.*;
 
 /**
  *
@@ -12,7 +13,7 @@ import PatientManagementModel.*;
  */
 public class Patient extends User
 {
-    private Appointment[] history;
+    private List<Appointment> history = new ArrayList<Appointment>();
     private Appointment upComingAppointment;
     private Perscription currentPerscription;
     private String dateOfBirth;
@@ -73,6 +74,11 @@ public class Patient extends User
     public String GetGender()
     {
         return gender;
+    }
+    
+    public List<Appointment> getHistory()
+    {
+        return history;
     }
     
     public void RequestTermination()

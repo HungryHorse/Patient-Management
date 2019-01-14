@@ -4,12 +4,28 @@
  * and open the template in the editor.
  */
 package PatientManagementModel;
-
+import Users.*;
 /**
  *
  * @author jjbrewer
  */
 public class Appointment 
 {
-    //private;    
+    private Doctor doctor;
+    private Patient patient;
+    private String notes;
+    private String date;
+    
+    
+    public Appointment(Doctor attendingDoctor, Patient patient, String date)
+    {
+        this.doctor = attendingDoctor;
+        this.patient = patient;
+        this.date = date;
+    }
+    
+    public void makeNote(String notes)
+    {
+        this.notes += notes + "\n";
+    }
 }

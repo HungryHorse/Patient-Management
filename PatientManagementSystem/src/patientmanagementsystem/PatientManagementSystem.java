@@ -5,6 +5,7 @@
  */
 package patientmanagementsystem;
 import Users.*;
+import PatientManagementModel.*;
 
 /**
  *
