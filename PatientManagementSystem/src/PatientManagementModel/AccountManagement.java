@@ -31,25 +31,29 @@ public class AccountManagement
     public void requestAccount(Patient newPatient)
     {
         requestedAccountCreation.add(newPatient);
+        newPatient.setUniqueID(createID("patient"));
     }
     
     public void approveAccout(Patient approvedPatient)
     {
         requestedAccountCreation.remove(approvedPatient);
         accounts.add(approvedPatient);
-        approvedPatient.setUniqueID(createID("patient"));
     }
     
     public void createDoctor(Doctor doctor)
     {
-        
+        accounts.add(doctor);
     }
     
     public void createSecretary(Secretary secretary)
     {
-        
+        accounts.add(secretary);
     }
     
+    public void createAdmin(Admin admin)
+    {
+        accounts.add(admin);
+    }
     public void requestAccountTermination(Patient patientToRemove)
     {
         requestedAccountTermination.add(patientToRemove);
@@ -72,22 +76,37 @@ public class AccountManagement
         switch(type)
         {
             case "doctor":
-                ID = "D" + noOfDoctors;
+                ID = String.format("D%04d", noOfDoctors);
                 noOfDoctors++;
                 break;
             case "patient":
-                ID = "P" + noOfPatients;
+                ID = String.format("P%04d", noOfPatients);
                 noOfPatients++;
                 break;
             case "secretary":
-                ID = "S" + noOfSecretaries;
+                ID = String.format("S%04d", noOfSecretaries);
                 noOfSecretaries++;
                 break;
             case "admin":
-                ID = "A" + noOfAdmins;
+                ID = String.format("A%04d", noOfAdmins);
                 noOfAdmins++;
                 break;
         }
         return ID;
+    }
+    
+    public User findByID(String IDToFind)
+    {
+        User userFound = null;
+        
+        for(int i = 0; i < accounts.size(); i++)
+        {
+            if(accounts.get(i).getUniqueID() == IDToFind)
+            {
+                userFound = accounts.get(i);
+            }
+        }
+        
+        return userFound;
     }
 }

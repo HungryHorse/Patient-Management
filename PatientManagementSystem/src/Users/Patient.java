@@ -12,7 +12,6 @@ import PatientManagementModel.*;
  */
 public class Patient extends User
 {
-    private AccountManagement AccountManager;
     private Appointment[] history;
     private Appointment upComingAppointment;
     private Perscription currentPerscription;
@@ -22,7 +21,7 @@ public class Patient extends User
     
     public Patient(AccountManagement AccountManager)
     {
-        this.AccountManager = AccountManager;
+        this.accountManager = AccountManager;
     }
     
     public void RequestAccount(String password, String givenName, String surname, String adress, String dateOfBirth, String gender)
@@ -33,7 +32,7 @@ public class Patient extends User
         this.address = adress;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
-        AccountManager.requestAccount(this); 
+        accountManager.requestAccount(this); 
     }
     
     public void RateDoctor(Doctor doctor)
@@ -78,6 +77,6 @@ public class Patient extends User
     
     public void RequestTermination()
     {
-        AccountManager.requestAccountTermination(this);
+        accountManager.requestAccountTermination(this);
     }
 }

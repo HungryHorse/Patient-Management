@@ -5,12 +5,14 @@
  */
 package Users;
 import java.util.*;
+import PatientManagementModel.*;
 /**
  *
  * @author jjbrewer
  */
 public abstract class User 
 {
+    protected AccountManagement accountManager;
     protected String uniqueID;
     protected String password;
     protected String givenName;
