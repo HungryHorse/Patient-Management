@@ -4,21 +4,25 @@
  * and open the template in the editor.
  */
 package Users;
-
+import java.util.*;
 /**
  *
  * @author jjbrewer
  */
 public abstract class User 
 {
-    private String uniqueID;
-    private String password;
-    private String givenName;
-    private String surname;
-    private String address;
-    private String[] notifications;
+    protected String uniqueID;
+    protected String password;
+    protected String givenName;
+    protected String surname;
+    protected String address;
+    protected List<String> notifications = new ArrayList<String>();
         
-
+    public void setUniqueID(String ID)
+    {
+        this.uniqueID = ID;
+    }
+    
     public String getUniqueID() 
     {
         return uniqueID;
@@ -49,7 +53,7 @@ public abstract class User
         return address;
     }
 
-    public String[] getNotifications() 
+    public List<String> getNotifications() 
     {
         return notifications;
     }
