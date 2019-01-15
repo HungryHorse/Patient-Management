@@ -12,7 +12,31 @@ import Users.*;
 public class Medacine 
 {
     private int stock;
+    private String name;
+
+    public Medacine(String name)
+    {
+       stock = 0;
+       this.name = name;
+    }
+    
+    public int getStock() 
+    {
+        return stock;
+    }
+
+    public String getName() {
+        return name;
+    }
+    
+    public void setStock(int stock) 
+    {
+        this.stock = stock;
+    }  
     
     
-    
+    public void restockMedacine(int stockToBuy)
+    {
+        stock += stockToBuy;
+    }
 }

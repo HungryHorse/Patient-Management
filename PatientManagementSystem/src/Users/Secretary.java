@@ -15,10 +15,7 @@ import PatientManagementModel.*;
 public class Secretary extends User 
 {
     
-    private List<Appointment> requestedAppointments = new ArrayList<Appointment>();
-    private List<User> requestedAccounts = new ArrayList<User>();
-    
-    public Secretary(AccountManagement accountManager, String password, String givenName, String surname, String adress, String dateOfBirth, String gender)
+    public Secretary(AccountManagement accountManager, MedacineManager medacineManager, String password, String givenName, String surname, String adress, String dateOfBirth, String gender)
     {
         this.accountManager = accountManager;
         this.givenName = givenName;
@@ -26,17 +23,7 @@ public class Secretary extends User
         this.password = password;
         this.address = adress;
     }
-    
-    public void addRequest(User userRequestingAccount)
-    {
-        requestedAccounts.add(userRequestingAccount);
-    }
-    
-    public void addAppointmentRequest(Appointment requestedAppointment)
-    {
-        requestedAppointments.add(requestedAppointment);
-    }
-    
+        
     public void approveAccount(Patient patient)
     {
         accountManager.approveAccout(patient);
@@ -52,13 +39,34 @@ public class Secretary extends User
         accountManager.approveTermination(patient);
     }
     
-    public void createAppointment(Patient patient, Doctor doctor)
+    public List<User> getRequestedAccounts()
     {
-        
+        return accountManager.getRequestedAccountCreation();
     }
     
-    public void giveMedacine(Patient patient)
+    public List<Appointment> getRequestedAppointments()
     {
-        
+        return accountManager.getRequestedAppointments();
+    }
+    
+    public List<User> getRequestedTermination()
+    {
+        return accountManager.getRequestedAccountTermination();
+    }
+    
+    public void restockMedacine(Medacine medacine, int stockToBuy)
+    {
+        medacine.restockMedacine(stockToBuy);
+    }
+    
+    public void createAppointment(Patient patient, Doctor doctor, String date)
+    {
+        Appointment newAppointment = new Appointment(doctor, patient, date);
+        accountManager.addAppointment(doctor, patient, newAppointment);
+    }
+    
+    public void giveMedacine(Patient patient, Appointment appointment)
+    {
+        patient.setPerscription(appointment.getPerscription());
     }
 }

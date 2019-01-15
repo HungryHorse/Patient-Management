@@ -5,6 +5,7 @@
  */
 package Users;
 import PatientManagementModel.*;
+import java.util.*;
 
 /**
  *
@@ -12,9 +13,10 @@ import PatientManagementModel.*;
  */
 public class Admin extends User
 {
-    public Admin(AccountManagement accountManager, String password, String givenName, String surname, String adress, String dateOfBirth, String gender)
+    public Admin(AccountManagement accountManager,MedacineManager medacineManager, String password, String givenName, String surname, String adress, String dateOfBirth, String gender)
     {
         this.accountManager = accountManager;
+        this.medacineManager = medacineManager;
         this.givenName = givenName;
         this.surname = surname;
         this.password = password;
@@ -22,9 +24,9 @@ public class Admin extends User
         this.accountManager.createAdmin(this);
     }
     
-    public void addDoctor(AccountManagement accountManager, String password, String givenName, String surname, String adress, String dateOfBirth, String gender)
+    public void addDoctor(AccountManagement accountManager, MedacineManager medacineManager, String password, String givenName, String surname, String adress, String dateOfBirth, String gender)
     {
-        Doctor newDoctor = new Doctor(accountManager, password, givenName, surname, adress, dateOfBirth, gender);
+        Doctor newDoctor = new Doctor(accountManager, medacineManager, password, givenName, surname, adress, dateOfBirth, gender);
         accountManager.createDoctor(newDoctor);
     }
     
@@ -33,9 +35,9 @@ public class Admin extends User
         accountManager.removeDoctor(doctor);
     }
     
-    public void addSecretary(AccountManagement accountManager, String password, String givenName, String surname, String adress, String dateOfBirth, String gender)
+    public void addSecretary(AccountManagement accountManager, MedacineManager medacineManager, String password, String givenName, String surname, String adress, String dateOfBirth, String gender)
     {
-        Secretary newSecretary = new Secretary(accountManager, password, givenName, surname, adress, dateOfBirth, gender);
+        Secretary newSecretary = new Secretary(accountManager, medacineManager, password, givenName, surname, adress, dateOfBirth, gender);
         accountManager.createSecretary(newSecretary);
     }
     
@@ -44,13 +46,13 @@ public class Admin extends User
         accountManager.removeSecretary(secretary);
     }
     
-    public void veiwDoctorRatings(Doctor doctor)
+    public List<String> veiwDoctorRatings(Doctor doctor)
     {
-        
+        return doctor.getRatings();
     }
     
-    public void giveFeedback(Doctor doctor)
+    public void giveFeedback(Doctor doctor, String feedback)
     {
-        
+        doctor.addFeedback(feedback);
     }
 }

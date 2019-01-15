@@ -13,6 +13,7 @@ import PatientManagementModel.*;
 public abstract class User 
 {
     protected AccountManagement accountManager;
+    protected MedacineManager medacineManager;
     protected String uniqueID;
     protected String password;
     protected String givenName;

@@ -16,7 +16,7 @@ public class Patient extends User
     private List<Appointment> history = new ArrayList<Appointment>();
     private Appointment upComingAppointment;
     private Perscription currentPerscription;
-    private String dateOfBirth;
+    private int age;
     private String gender;
     private Boolean approved;
     
@@ -25,35 +25,36 @@ public class Patient extends User
         this.accountManager = AccountManager;
     }
     
-    public void RequestAccount(String password, String givenName, String surname, String adress, String dateOfBirth, String gender)
+    public void RequestAccount(String password, String givenName, String surname, String adress, int age, String gender)
     {
         this.givenName = givenName;
         this.surname = surname;
         this.password = password;
         this.address = adress;
         this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
+        this.age = age;
         accountManager.requestAccount(this); 
     }
     
-    public void RateDoctor(Doctor doctor)
+    public void RateDoctor(Doctor doctor, String rating)
     {
-                
+        doctor.setRating(rating);
     }
     
-    public void SeeDoctorRatings(Doctor doctor)
+    public List<String> SeeDoctorRatings(Doctor doctor)
     {
-                
-    }
-    
-    public void RequestAppointment(String date)
-    {
-        
+        return doctor.getRatings();
     }
     
     public void RequestAppointment(Doctor preferedDoctor, String date)
     {
-        
+        Appointment newAppointment = new Appointment(this, preferedDoctor, this, date);
+        accountManager.requestAppointment(newAppointment);
+    }
+    
+    public void setUpComingAppointment(Appointment appointment)
+    {
+        upComingAppointment = appointment;
     }
     
     public Perscription GetPerscription()
@@ -66,9 +67,9 @@ public class Patient extends User
         return upComingAppointment;
     }
     
-    public String GetDOB()
+    public int GetDOB()
     {
-        return dateOfBirth;
+        return age;
     }
     
     public String GetGender()
@@ -84,5 +85,10 @@ public class Patient extends User
     public void RequestTermination()
     {
         accountManager.requestAccountTermination(this);
+    }
+    
+    public void setPerscription(Perscription perscription)
+    {
+        this.currentPerscription = perscription;
     }
 }

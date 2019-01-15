@@ -13,6 +13,7 @@ import Users.*;
  */
 public class AccountManagement 
 {
+    private List<Appointment> requestedAppointments = new ArrayList<Appointment>();
     private List<User> requestedAccountCreation = new ArrayList<User>();
     private List<User> requestedAccountTermination = new ArrayList<User>();
     private List<User> accounts = new ArrayList<User>();
@@ -31,6 +32,11 @@ public class AccountManagement
     {
         requestedAccountCreation.add(newPatient);
         newPatient.setUniqueID(createID("patient"));
+    }    
+    
+    public void requestAppointment(Appointment appointment)
+    {
+        requestedAppointments.add(appointment);
     }
     
     public void approveAccout(Patient approvedPatient)
@@ -123,5 +129,24 @@ public class AccountManagement
         }
         
         return userFound;
+    }
+    
+    public List<Appointment> getRequestedAppointments()
+    {
+        return requestedAppointments;
+    }
+
+    public List<User> getRequestedAccountCreation() {
+        return requestedAccountCreation;
+    }
+
+    public List<User> getRequestedAccountTermination() {
+        return requestedAccountTermination;
+    }
+    
+    public void addAppointment(Doctor attendingDoctor, Patient attendingPatient, Appointment appointment)
+    {
+        attendingDoctor.addAppointment(appointment);
+        attendingPatient.setUpComingAppointment(appointment);
     }
 }

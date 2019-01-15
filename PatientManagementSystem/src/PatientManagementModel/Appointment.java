@@ -11,10 +11,12 @@ import Users.*;
  */
 public class Appointment 
 {
+    private User proposedBy;
     private Doctor doctor;
     private Patient patient;
     private String notes;
     private String date;
+    private Perscription perscription;
     
     
     public Appointment(Doctor attendingDoctor, Patient patient, String date)
@@ -24,8 +26,28 @@ public class Appointment
         this.date = date;
     }
     
+    public Appointment(User proposedBy, Doctor attendingDoctor, Patient patient, String date)
+    {
+        this.doctor = attendingDoctor;
+        this.patient = patient;
+        this.date = date;
+        this.proposedBy = proposedBy;
+    }
+    
+    public void addPerscription(Perscription perscription)
+    {
+        this.perscription = perscription;
+    }
+    
     public void makeNote(String notes)
     {
         this.notes += notes + "\n";
     }
+
+    public Perscription getPerscription() 
+    {
+        return perscription;
+    }
+    
+    
 }
