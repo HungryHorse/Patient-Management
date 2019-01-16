@@ -7,6 +7,7 @@ package Controller;
 import GUI.*;
 import PatientManagementModel.*;
 import Users.*;
+import java.util.List;
 
 /**
  *
@@ -98,7 +99,19 @@ public class Controller
         }
     }
     
+    public List<User> getDoctors()
+    {
+        return accountManager.getDoctors(); 
+   }
     
+    public List<User> getSecretaries()
+    {
+        return accountManager.getSecretaries();
+    }
     
-    
+    public void removeUserByID(String ID)
+    {
+       User user = accountManager.findByID(ID);
+       accountManager.removeAccount(user);
+    }
 }

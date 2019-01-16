@@ -131,9 +131,9 @@ public class AccountManagement
      *
      * @param patientToRemove
      */
-    public void removeAccount(Patient patientToRemove)
+    public void removeAccount(User userToRemove)
     {
-        accounts.remove(patientToRemove);
+        accounts.remove(userToRemove);
     }
     
     /**
