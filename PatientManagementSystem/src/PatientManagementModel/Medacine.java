@@ -14,27 +14,46 @@ public class Medacine
     private int stock;
     private String name;
 
+    /**
+     *
+     * @param name
+     */
     public Medacine(String name)
     {
        stock = 0;
        this.name = name;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getStock() 
     {
         return stock;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getName() {
         return name;
     }
     
+    /**
+     *
+     * @param stock
+     */
     public void setStock(int stock) 
     {
         this.stock = stock;
     }  
     
-    
+    /**
+     *
+     * @param stockToBuy
+     */
     public void restockMedacine(int stockToBuy)
     {
         stock += stockToBuy;

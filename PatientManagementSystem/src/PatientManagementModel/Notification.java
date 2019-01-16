@@ -14,9 +14,26 @@ import utilities.*;
  */
 public abstract class Notification implements Subject
 {
+
+    /**
+     *
+     */
     protected String notificationMessage;
     private ArrayList<Observer> observers = null;
     
+    /**
+     *
+     */
+    public Notification()
+    {
+        
+    }
+    
+    /**
+     *
+     * @param o
+     * @return
+     */
     @Override
     public Boolean removeObserver(Observer o)
     {
@@ -31,6 +48,11 @@ public abstract class Notification implements Subject
         return removed;
     }
     
+    /**
+     *
+     * @param o
+     * @return
+     */
     @Override
     public Boolean registerObserver(Observer o)
     {
@@ -49,9 +71,18 @@ public abstract class Notification implements Subject
         return registered;
     }
     
+    /**
+     *
+     */
     @Override
     public void notifyObservers()
     {
-        
+        if (this.observers != null && this.observers.size() > 0)
+        {
+            for (Observer currentObserver : this.observers) 
+            {
+                currentObserver.update(this.notificationMessage);
+            }
+        }
     }
 }

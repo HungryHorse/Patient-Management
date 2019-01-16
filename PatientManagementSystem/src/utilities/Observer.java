@@ -11,5 +11,9 @@ package utilities;
  */
 public interface Observer 
 {
-    void update();
+
+    /**
+     *
+     */
+    void update(String notifcationMessage);
 }

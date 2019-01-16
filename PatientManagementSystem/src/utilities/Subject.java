@@ -11,7 +11,23 @@ package utilities;
  */
 public interface Subject 
 {
+
+    /**
+     *
+     * @param o
+     * @return
+     */
     Boolean registerObserver(Observer o);
+
+    /**
+     *
+     * @param o
+     * @return
+     */
     Boolean removeObserver(Observer o);
+
+    /**
+     *
+     */
     void notifyObservers();
 }

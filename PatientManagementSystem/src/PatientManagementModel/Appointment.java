@@ -18,7 +18,12 @@ public class Appointment
     private String date;
     private Perscription perscription;
     
-    
+    /**
+     *
+     * @param attendingDoctor
+     * @param patient
+     * @param date
+     */
     public Appointment(Doctor attendingDoctor, Patient patient, String date)
     {
         this.doctor = attendingDoctor;
@@ -26,6 +31,13 @@ public class Appointment
         this.date = date;
     }
     
+    /**
+     *
+     * @param proposedBy
+     * @param attendingDoctor
+     * @param patient
+     * @param date
+     */
     public Appointment(User proposedBy, Doctor attendingDoctor, Patient patient, String date)
     {
         this.doctor = attendingDoctor;
@@ -34,16 +46,28 @@ public class Appointment
         this.proposedBy = proposedBy;
     }
     
+    /**
+     *
+     * @param perscription
+     */
     public void addPerscription(Perscription perscription)
     {
         this.perscription = perscription;
     }
     
+    /**
+     *
+     * @param notes
+     */
     public void makeNote(String notes)
     {
         this.notes += notes + "\n";
     }
 
+    /**
+     *
+     * @return
+     */
     public Perscription getPerscription() 
     {
         return perscription;

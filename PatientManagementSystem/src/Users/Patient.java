@@ -20,75 +20,144 @@ public class Patient extends User
     private String gender;
     private Boolean approved;
     
-    public Patient(AccountManagement AccountManager)
-    {
-        this.accountManager = AccountManager;
-    }
+    /**
+     *
+     * @param AccountManager
+     */
     
-    public void RequestAccount(String password, String givenName, String surname, String adress, int age, String gender)
+    /**
+     *
+     * @param password
+     * @param givenName
+     * @param surname
+     * @param adress
+     * @param age
+     * @param gender
+     */
+    public  Patient(String password, String givenName, String surname, String address, int age, String gender, AccountManagement accountManager)
     {
         this.givenName = givenName;
         this.surname = surname;
         this.password = password;
-        this.address = adress;
+        this.address = address;
         this.gender = gender;
         this.age = age;
-        accountManager.requestAccount(this); 
+        this.accountManager = accountManager;
+        RequestAccount();
     }
     
+    public void RequestAccount()
+    {
+        accountManager.requestAccount(this); 
+    }
+    /**
+     *
+     * @param doctor
+     * @param rating
+     */
     public void RateDoctor(Doctor doctor, String rating)
     {
         doctor.setRating(rating);
     }
     
+    /**
+     *
+     * @param doctor
+     * @return
+     */
     public List<String> SeeDoctorRatings(Doctor doctor)
     {
         return doctor.getRatings();
     }
     
+    /**
+     *
+     * @param preferedDoctor
+     * @param date
+     */
     public void RequestAppointment(Doctor preferedDoctor, String date)
     {
         Appointment newAppointment = new Appointment(this, preferedDoctor, this, date);
         accountManager.requestAppointment(newAppointment);
     }
     
+    /**
+     *
+     * @param appointment
+     */
     public void setUpComingAppointment(Appointment appointment)
     {
         upComingAppointment = appointment;
     }
     
+    /**
+     *
+     * @return
+     */
     public Perscription GetPerscription()
     {
         return currentPerscription;
     }
     
+    /**
+     *
+     * @return
+     */
     public Appointment GetAppointment()
     {
         return upComingAppointment;
     }
     
+    /**
+     *
+     * @return
+     */
     public int GetDOB()
     {
         return age;
     }
     
+    /**
+     *
+     * @return
+     */
     public String GetGender()
     {
         return gender;
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Appointment> getHistory()
     {
         return history;
     }
     
+    /**
+     *
+     */
     public void RequestTermination()
     {
         accountManager.requestAccountTermination(this);
     }
     
+    /**
+     *
+     * @param perscription
+     */
     public void setPerscription(Perscription perscription)
     {
         this.currentPerscription = perscription;
+    }
+    
+    /**
+     *
+     */
+    @Override
+    public void update(String notificationMessage)
+    {
+        
     }
 }

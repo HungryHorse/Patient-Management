@@ -6,6 +6,7 @@
 package patientmanagementsystem;
 import Users.*;
 import PatientManagementModel.*;
+import Controller.*;
 
 /**
  *
@@ -18,7 +19,9 @@ public class PatientManagementSystem {
      */
     public static void main(String[] args) 
     {
-        
+        AccountManagement accountManager = new AccountManagement();
+        MedacineManager medacineManager = new MedacineManager();
+        Controller controller = new Controller(accountManager, medacineManager);
     }
     
 }

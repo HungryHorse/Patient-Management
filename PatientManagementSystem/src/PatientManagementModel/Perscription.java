@@ -17,6 +17,14 @@ public class Perscription
     private int quantity;
     private String dosage;
 
+    /**
+     *
+     * @param medacinePrescribed
+     * @param doctor
+     * @param patient
+     * @param quantity
+     * @param dosage
+     */
     public Perscription(Medacine medacinePrescribed, Doctor doctor, Patient patient, int quantity, String dosage) 
     {
         this.medacinePrescribed = medacinePrescribed;

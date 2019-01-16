@@ -11,23 +11,42 @@ import java.util.*;
  */
 public class MedacineManager 
 {
+    private MedacineNotification medacineNotification = new MedacineNotification();
     private List<Medacine> medacineList = new ArrayList<Medacine>();
     private List<Medacine> medacineToRestock = new ArrayList<Medacine>();
 
+    /**
+     *
+     * @return
+     */
     public List<Medacine> getMedacineList() {
         return medacineList;
     }
     
+    /**
+     *
+     * @param medacine
+     */
     public void addMedacine(Medacine medacine)
     {
         medacineList.add(medacine);
     }
     
+    /**
+     *
+     * @param medacine
+     */
     public void addMedacineToRestock(Medacine medacine)
     {
         medacineToRestock.add(medacine);
+        medacineNotification.medacineUpdate();
     }
     
+    /**
+     *
+     * @param name
+     * @return
+     */
     public Medacine findMedacine(String name)
     {
         for(int i = 0; i < medacineList.size(); i++)
