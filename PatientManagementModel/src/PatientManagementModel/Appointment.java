@@ -46,6 +46,11 @@ public class Appointment
         this.date = date;
         this.proposedBy = proposedBy;
     }
+    
+    public void setNotes(String notes)
+    {
+        this.notes = notes;
+    }
 
     /**
      *

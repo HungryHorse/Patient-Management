@@ -7,10 +7,6 @@ package PatientManagementModel;
 import java.util.*;
 import Users.*;
 import java.io.Serializable;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 /**
  *
@@ -25,7 +21,7 @@ public class AccountManagement implements Serializable
     private List<User> accounts = new ArrayList<User>();
     private List<Doctor> doctors = new ArrayList<Doctor>();
     private List<Patient> patients = new ArrayList<Patient>();
-    MedacineManager medacineManager;
+    private MedacineManager medacineManager;
     private AppointmentNotification appointmentNotification = new AppointmentNotification();
     private AccountNotification accountNotification = new AccountNotification();
     private MedacineNotification medacineNotification = new MedacineNotification();
