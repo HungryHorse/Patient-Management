@@ -78,7 +78,7 @@ public class SecretaryForm extends javax.swing.JFrame {
             for(Appointment appointment : requestedAppointment)
             {
                 Object[] obj = {appointment.getProposedBy(), appointment.getDoctor(), appointment.getPatient(), appointment.getDate()};
-                tableModel.addRow(obj);
+                tableModel.addRow(obj); 
             }
         }
     }
@@ -108,6 +108,11 @@ public class SecretaryForm extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblUser1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
+        txtDate = new javax.swing.JTextField();
+        txtDoctor = new javax.swing.JTextField();
+        txtPatient = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        btnCreateAppointment = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -328,15 +333,58 @@ public class SecretaryForm extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Requested appointments", jPanel3);
 
+        txtDate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDate.setText("Date");
+
+        txtDoctor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDoctor.setText("Doctor ID");
+
+        txtPatient.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPatient.setText("Patient ID");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Create Appointment");
+
+        btnCreateAppointment.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCreateAppointment.setText("Create");
+        btnCreateAppointment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateAppointmentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 838, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(264, 264, 264)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(86, Short.MAX_VALUE)
+                .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnCreateAppointment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPatient, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(182, 182, 182))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 465, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(82, 82, 82)
+                .addComponent(btnCreateAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(189, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Create appointment", jPanel4);
@@ -409,10 +457,17 @@ public class SecretaryForm extends javax.swing.JFrame {
         resetTable();
     }//GEN-LAST:event_btnApproveUserByIDActionPerformed
 
+    private void btnCreateAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAppointmentActionPerformed
+        // TODO add your handling code here:
+        controller.CreateAppointment(txtDoctor.getText(), txtPatient.getText(), txtDate.getText());
+    }//GEN-LAST:event_btnCreateAppointmentActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApproveUserByID;
+    private javax.swing.JButton btnCreateAppointment;
     private javax.swing.JButton btnLogOff;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -429,6 +484,9 @@ public class SecretaryForm extends javax.swing.JFrame {
     private javax.swing.JLabel lblUserID;
     private javax.swing.JTable tblUser;
     private javax.swing.JTable tblUser1;
+    private javax.swing.JTextField txtDate;
+    private javax.swing.JTextField txtDoctor;
+    private javax.swing.JTextField txtPatient;
     private javax.swing.JTextField txtUserIDToApprove;
     // End of variables declaration//GEN-END:variables
 }

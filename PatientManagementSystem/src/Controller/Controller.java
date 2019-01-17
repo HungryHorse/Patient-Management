@@ -165,13 +165,21 @@ public class Controller
     
     public void approvePatient(String ID)
     {
-         User user = accountManager.findByID(ID);
-        accountManager.approveAccout(user);
+        Patient patient = accountManager.findPatientByID(ID);
+        accountManager.approveAccout(patient);
     }
     
     public List<Appointment> getRequestedAppointments()
     {
         return accountManager.getRequestedAppointments();
+    }
+    
+    public void CreateAppointment(String DoctorID, String PatientID, String date)
+    {
+        Doctor attendingDoctor = accountManager.findDoctorByID(DoctorID);
+        Patient attendingPatient = accountManager.findPatientByID(PatientID);
+        Appointment appointment = accountManager.createAppointment(attendingDoctor, attendingPatient, date);
+        accountManager.addAppointment(attendingDoctor, attendingPatient, appointment);
     }
     
     public void removeUserByID(String ID)

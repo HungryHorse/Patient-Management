@@ -18,21 +18,6 @@ public class Appointment
     private String date;
     private Perscription perscription;
 
-    public User getProposedBy() {
-        return proposedBy;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public String getDate() {
-        return date;
-    }
     
     /**
      *
@@ -60,6 +45,23 @@ public class Appointment
         this.patient = patient;
         this.date = date;
         this.proposedBy = proposedBy;
+    }
+    
+    
+    public User getProposedBy() {
+        return proposedBy;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public String getDate() {
+        return date;
     }
     
     /**

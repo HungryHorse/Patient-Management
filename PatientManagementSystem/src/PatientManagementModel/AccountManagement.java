@@ -19,6 +19,7 @@ public class AccountManagement
     private List<User> requestedAccountTermination = new ArrayList<User>();
     private List<User> accounts = new ArrayList<User>();
     private List<Doctor> doctors = new ArrayList<Doctor>();
+    private List<Patient> patients = new ArrayList<Patient>();
     private AppointmentNotification appointmentNotification = new AppointmentNotification();
     private AccountNotification accountNotification = new AccountNotification();
     private int noOfDoctors = 0;
@@ -63,10 +64,11 @@ public class AccountManagement
      *
      * @param approvedPatient
      */
-    public void approveAccout(User approvedPatient)
+    public void approveAccout(Patient approvedPatient)
     {
         requestedAccountCreation.remove(approvedPatient);
         accounts.add(approvedPatient);
+        patients.add(approvedPatient);
     }
     
     /**
@@ -221,6 +223,21 @@ public class AccountManagement
         return doctorFound;
     }
     
+    public Patient findPatientByID(String IDToFind)
+    {
+        Patient patientFound = null;
+        
+        for(int i = 0; i < patients.size(); i++)
+        {
+            if(patients.get(i).getUniqueID().equals(IDToFind))
+            {
+                patientFound = patients.get(i);
+            }
+        }
+        
+        return patientFound;
+    }
+    
     /**
      *
      * @return
@@ -244,6 +261,12 @@ public class AccountManagement
      */
     public List<User> getRequestedAccountTermination() {
         return requestedAccountTermination;
+    }
+    
+    public Appointment createAppointment(Doctor attendingDoctor, Patient attendingPatient, String date)
+    {
+        Appointment appointment = new Appointment(attendingDoctor, attendingPatient, date);
+        return appointment;
     }
     
     /**
