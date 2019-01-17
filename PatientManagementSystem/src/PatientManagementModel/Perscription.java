@@ -33,6 +33,26 @@ public class Perscription
         this.quantity = quantity;
         this.dosage = dosage;
     }
+
+    public Medacine getMedacinePrescribed() {
+        return medacinePrescribed;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public String getDosage() {
+        return dosage;
+    }
     
     
 }

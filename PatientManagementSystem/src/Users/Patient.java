@@ -152,6 +152,11 @@ public class Patient extends User
         this.currentPerscription = perscription;
     }
     
+    public void addAppointmentToHistory(Appointment appointment)
+    {
+        history.add(appointment);
+    }
+    
     /**
      *
      */

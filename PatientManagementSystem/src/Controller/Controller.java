@@ -215,6 +215,12 @@ public class Controller
        return user;
     }
     
+    public Patient getPatientByID(String ID)
+    {
+       Patient patient = accountManager.findPatientByID(ID);
+       return patient;
+    }
+    
     public Doctor getDoctorByID(String ID)
     {
        Doctor doctor = accountManager.findDoctorByID(ID);
@@ -281,5 +287,20 @@ public class Controller
     public List<Medacine> getMedacineToRestockList()
     {
         return medacineManager.getMedacineToRestock();
+    }
+    
+    public void proposeAppointment(User user, String DoctorID, String PatientID, String date)
+    {
+        Doctor attendingDoctor = accountManager.findDoctorByID(DoctorID);
+        Patient attendingPatient = accountManager.findPatientByID(PatientID);
+        Appointment appointment = new Appointment(user, attendingDoctor, attendingPatient, date);
+        accountManager.requestAppointment(appointment);
+    }
+    
+    public void createMedacine(String name)
+    {
+        Medacine newMedacine = new Medacine(name);
+        medacineManager.addMedacine(newMedacine);
+        medacineManager.addMedacineToRestock(newMedacine);
     }
 }
