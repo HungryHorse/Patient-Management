@@ -8,8 +8,10 @@ package GUI;
 import PatientManagementModel.Appointment;
 import PatientManagementModel.Medacine;
 import PatientManagementModel.Perscription;
+import Users.User;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -27,11 +29,32 @@ public class AppointmentForm extends javax.swing.JFrame {
         initComponents();
         this.appointment = appointment;
         this.medacine = medacine;
+        appointmentFormCreated();
     }
     
     public void appointmentFormCreated()
     {
-        
+        populateComboBox();
+        lblDoctorAddress.setText(appointment.getDoctor().getAddress());
+        lblDoctorName.setText(appointment.getDoctor().getGivenName() + " " + appointment.getDoctor().getSurname());
+        lblPatientAddress.setText(appointment.getPatient().getAddress());;
+        lblPatientAge.setText(Integer.toString(appointment.getPatient().GetDOB()));
+        lblPatientGender.setText(appointment.getPatient().GetGender());
+        lblPatientName.setText(appointment.getPatient().getGivenName() + " " + appointment.getPatient().getSurname());
+    }
+    
+    public void populateComboBox()
+    {
+        List<String> ls = new ArrayList<String>();
+        if(medacine != null)
+        {
+            for(Medacine med : medacine)
+            {
+                ls.add(med.getName());
+            }
+
+            cmbxMedacine.setModel(new DefaultComboBoxModel(ls.toArray()));
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -200,7 +223,7 @@ public class AppointmentForm extends javax.swing.JFrame {
         {
             quantity = (Integer) spnQuantity.getValue();
         }
-        Perscription newPerscription = new Perscription(cmbxMedacine.getSelectedIndex(), appointment.getDoctor(), appointment.getPatient(), quantity, txtDosage.getText());
+        Perscription newPerscription = new Perscription(medacine.get(cmbxMedacine.getSelectedIndex()), appointment.getDoctor(), appointment.getPatient(), quantity, txtDosage.getText());
         appointment.addPerscription(newPerscription);
     }//GEN-LAST:event_btnMakePerscriptionActionPerformed
 
