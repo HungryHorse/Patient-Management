@@ -18,35 +18,38 @@ import static org.junit.Assert.*;
  */
 public class MedacineNotificationTest {
     
+    /**
+     *
+     */
     public MedacineNotificationTest() {
     }
     
+    /**
+     *
+     */
     @BeforeClass
     public static void setUpClass() {
     }
     
+    /**
+     *
+     */
     @AfterClass
     public static void tearDownClass() {
     }
     
+    /**
+     *
+     */
     @Before
     public void setUp() {
     }
     
+    /**
+     *
+     */
     @After
     public void tearDown() {
-    }
-
-    /**
-     * Test of medacineUpdate method, of class MedacineNotification.
-     */
-    @Test
-    public void testMedacineUpdate() {
-        System.out.println("medacineUpdate");
-        MedacineNotification instance = new MedacineNotification();
-        instance.medacineUpdate();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

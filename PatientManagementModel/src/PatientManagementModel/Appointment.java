@@ -47,6 +47,10 @@ public class Appointment
         this.proposedBy = proposedBy;
     }
     
+    /**
+     *
+     * @param notes
+     */
     public void setNotes(String notes)
     {
         this.notes = notes;

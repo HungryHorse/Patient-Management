@@ -20,18 +20,34 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({PatientManagementModel.MedacineNotificationTest.class, PatientManagementModel.AppointmentTest.class, PatientManagementModel.AccountNotificationTest.class, PatientManagementModel.AppointmentNotificationTest.class, PatientManagementModel.MedacineTest.class, PatientManagementModel.MedacineManagerTest.class, PatientManagementModel.NotificationTest.class, PatientManagementModel.AccountManagementTest.class, PatientManagementModel.PerscriptionTest.class})
 public class PatientManagementModelSuite {
 
+    /**
+     *
+     * @throws Exception
+     */
     @BeforeClass
     public static void setUpClass() throws Exception {
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @AfterClass
     public static void tearDownClass() throws Exception {
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @After
     public void tearDown() throws Exception {
     }

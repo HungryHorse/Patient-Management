@@ -377,6 +377,11 @@ public class AccountManagement implements Serializable
         return patients;
     }
     
+    /**
+     *
+     * @param doctor
+     * @param reveiw
+     */
     public void addReview(Doctor doctor, String reveiw)
     {
         doctor.setRating(reveiw);

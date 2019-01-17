@@ -446,6 +446,11 @@ public class Controller
         medacineManager.addMedacineToRestock(newMedacine);
     }
     
+    /**
+     *
+     * @param doctor
+     * @param review
+     */
     public void addReview(Doctor doctor, String review)
     {
         accountManager.addReview(doctor, review);

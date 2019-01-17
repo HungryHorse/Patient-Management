@@ -101,6 +101,9 @@ public class PatientForm extends javax.swing.JPanel {
         }
     }
     
+    /**
+     *
+     */
     public void populateComboBox()
     {
         
