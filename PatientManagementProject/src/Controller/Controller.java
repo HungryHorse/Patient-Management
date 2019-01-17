@@ -18,9 +18,9 @@ public class Controller
 {
     private User currentlyLogedInOnPC;
     private LoginRegister loginPanel = new LoginRegister(this);
-    private PatientForm patientPanel;
-    private DoctorForm doctorPanel;
-    private SecretaryForm secretaryPanel;
+    private PatientForm patientPanel = new PatientForm(this);
+    private DoctorForm doctorPanel = new DoctorForm(this, this.medacineManager);
+    private SecretaryForm secretaryPanel = new SecretaryForm(this);
     private AdminForm adminPanel = new AdminForm(this);
     private AccountManagement accountManager;
     private MedacineManager medacineManager;
@@ -79,12 +79,12 @@ public class Controller
                     case 'D':
                         loginPanel.setVisible(false);
                         doctorPanel.setVisible(true);
-                        adminPanel.setWelcomePage();
+                        doctorPanel.setWelcomePage();
                         break;
                     case 'S':
                         loginPanel.setVisible(false);
                         secretaryPanel.setVisible(true);
-                        adminPanel.setWelcomePage();
+                        secretaryPanel.setWelcomePage();
                         break;
                     case 'A':
                         loginPanel.setVisible(false);
