@@ -169,6 +169,11 @@ public class Controller
         accountManager.approveAccout(user);
     }
     
+    public List<Appointment> getRequestedAppointments()
+    {
+        return accountManager.getRequestedAppointments();
+    }
+    
     public void removeUserByID(String ID)
     {
        User user = accountManager.findByID(ID);

@@ -17,6 +17,22 @@ public class Appointment
     private String notes;
     private String date;
     private Perscription perscription;
+
+    public User getProposedBy() {
+        return proposedBy;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public String getDate() {
+        return date;
+    }
     
     /**
      *

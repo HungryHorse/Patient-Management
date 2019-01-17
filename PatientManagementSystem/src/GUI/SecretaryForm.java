@@ -6,6 +6,7 @@
 package GUI;
 
 import Controller.Controller;
+import PatientManagementModel.Appointment;
 import Users.Patient;
 import Users.User;
 import java.util.List;
@@ -58,6 +59,29 @@ public class SecretaryForm extends javax.swing.JFrame {
             }
         }
     }
+    
+    public void resetAppointmentTable()
+    {
+        String[] cols = {"Suggested by", "Doctor ID", "Patient ID", "Date"};
+        tableModel = new DefaultTableModel(cols,0);
+        
+        tblUser.setModel(tableModel);
+        
+        populateTable();
+    }
+    
+    public void populateAppointmentTable()
+    {
+        List<Appointment> requestedAppointment = controller.getRequestedAppointments();
+        if(requestedAppointment != null)
+        {
+            for(Appointment appointment : requestedAppointment)
+            {
+                Object[] obj = {appointment.getProposedBy(), appointment.getDoctor(), appointment.getPatient(), appointment.getDate()};
+                tableModel.addRow(obj);
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,6 +105,8 @@ public class SecretaryForm extends javax.swing.JFrame {
         txtUserIDToApprove = new javax.swing.JTextField();
         btnApproveUserByID = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblUser1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -229,15 +255,75 @@ public class SecretaryForm extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Account requests", jPanel2);
 
+        tblUser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblUser1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Suggested by", "Doctor", "Patient", "Date"
+            }
+        ));
+        jScrollPane3.setViewportView(tblUser1);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 838, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(165, 165, 165)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                    .addGap(165, 165, 165)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 465, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(33, 33, 33)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(34, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Requested appointments", jPanel3);
@@ -336,11 +422,13 @@ public class SecretaryForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblSurname;
     private javax.swing.JLabel lblUserID;
     private javax.swing.JTable tblUser;
+    private javax.swing.JTable tblUser1;
     private javax.swing.JTextField txtUserIDToApprove;
     // End of variables declaration//GEN-END:variables
 }
