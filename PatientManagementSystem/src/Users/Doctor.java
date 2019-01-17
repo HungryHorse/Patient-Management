@@ -46,6 +46,11 @@ public class Doctor extends User
         appointment.makeNote(note);
     }
     
+    public void attendAppointment(Appointment appointment)
+    {
+        appointments.remove(appointment);
+    }
+    
     /**
      *
      * @param appointment
@@ -54,6 +59,11 @@ public class Doctor extends User
     public void addPerscription(Appointment appointment, Perscription perscription)
     {
         appointment.addPerscription(perscription);
+    }
+
+    public List<Appointment> getAppointments()
+    {
+        return appointments;
     }
     
     /**

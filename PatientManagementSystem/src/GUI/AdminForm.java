@@ -31,9 +31,6 @@ public class AdminForm extends javax.swing.JFrame {
     {
         initComponents();
         this.controller = controller;
-        resetTable();
-        populateComboBox();
-        populateFeedbackComboBox();
     }
     
     public void resetTable()
@@ -122,6 +119,10 @@ public class AdminForm extends javax.swing.JFrame {
         lblName.setText("Name: " + user.getGivenName());
         lblSurname.setText("Surname: " + user.getSurname());
         lblUserID.setText("User ID: " + user.getUniqueID());
+        
+        resetTable();
+        populateComboBox();
+        populateFeedbackComboBox();
     }
 
     /**

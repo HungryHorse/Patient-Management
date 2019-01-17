@@ -168,6 +168,16 @@ public class Controller
         return awaitingApproval;
     }
     
+    public List<Patient> getRequestingTermination()
+    {
+        List<Patient> requestedAccountTermination = new ArrayList<Patient>();
+        if(accountManager != null)
+        {
+            requestedAccountTermination = accountManager.getRequestedAccountTermination();
+        }
+        return requestedAccountTermination;
+    }
+    
     public void approvePatient(String ID)
     {
         Patient patient = accountManager.findPatientByID(ID);
@@ -191,6 +201,12 @@ public class Controller
     {
        User user = accountManager.findByID(ID);
        accountManager.removeAccount(user);
+    }
+    
+    public void terminateUserByID(String ID)
+    {
+        Patient patient = accountManager.findPatientByID(ID);
+        accountManager.approveTermination(patient);
     }
     
     public User getUserByID(String ID)

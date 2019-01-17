@@ -81,7 +81,7 @@ public class Secretary extends User
      *
      * @return
      */
-    public List<User> getRequestedTermination()
+    public List<Patient> getRequestedTermination()
     {
         return accountManager.getRequestedAccountTermination();
     }

@@ -16,7 +16,7 @@ public class AccountManagement
     private String AdminPass = "AdminPass01";
     private List<Appointment> requestedAppointments = new ArrayList<Appointment>();
     private List<Patient> requestedAccountCreation = new ArrayList<Patient>();
-    private List<User> requestedAccountTermination = new ArrayList<User>();
+    private List<Patient> requestedAccountTermination = new ArrayList<Patient>();
     private List<User> accounts = new ArrayList<User>();
     private List<Doctor> doctors = new ArrayList<Doctor>();
     private List<Patient> patients = new ArrayList<Patient>();
@@ -89,6 +89,7 @@ public class AccountManagement
     public void removeDoctor(Doctor doctor)
     {
         accounts.remove(doctor);
+        doctors.remove(doctor);
     }
     
     /**
@@ -108,6 +109,7 @@ public class AccountManagement
     public void removeSecretary(Secretary secretary)
     {
         accounts.remove(secretary);
+        
     }
     
     /**
@@ -137,6 +139,7 @@ public class AccountManagement
     public void removeAccount(User userToRemove)
     {
         accounts.remove(userToRemove);
+        patients.remove(userToRemove);
     }
     
     /**
@@ -147,6 +150,7 @@ public class AccountManagement
     {
         requestedAccountTermination.remove(patientToRemove);
         accounts.remove(patientToRemove);
+        patients.remove(patientToRemove);
     }
     
     /**
@@ -259,7 +263,8 @@ public class AccountManagement
      *
      * @return
      */
-    public List<User> getRequestedAccountTermination() {
+    public List<Patient> getRequestedAccountTermination() 
+    {
         return requestedAccountTermination;
     }
     

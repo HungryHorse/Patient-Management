@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class SecretaryForm extends javax.swing.JFrame {
     
     Controller controller;
-    private DefaultTableModel accountRequestTableModel, appointmentRequestTableModel, medacineRequestTableModel, accountRemovalTableModel;
+    private DefaultTableModel accountRequestTableModel, appointmentRequestTableModel, medacineRequestTableModel, accountRemovalTableModel, accountTerminationTableModel;
     /**
      * Creates new form SecretaryForm
      */
@@ -37,6 +37,12 @@ public class SecretaryForm extends javax.swing.JFrame {
         lblName.setText("Name: " + user.getGivenName());
         lblSurname.setText("Surname: " + user.getSurname());
         lblUserID.setText("User ID: " + user.getUniqueID());
+        
+        resetTable();
+        resetAppointmentTable();
+        resetAccountRemovalTable();
+        resetAccountTerminationTable();
+        resetMedacinTable();
     }
     
     public void resetTable()
@@ -104,6 +110,29 @@ public class SecretaryForm extends javax.swing.JFrame {
             {
                 Object[] obj = {patient.getUniqueID(), patient.getGivenName(), patient.getSurname()};
                 accountRemovalTableModel.addRow(obj); 
+            }
+        }
+    }
+    
+    public void resetAccountTerminationTable()
+    {
+        String[] cols = {"ID", "First Name", "Surname"};
+        accountTerminationTableModel = new DefaultTableModel(cols,0);
+        
+        tblRequestedTermination.setModel(accountTerminationTableModel);
+        
+        populateAccountRemovalTable();
+    }
+    
+    public void populateAccountTerminationTable()
+    {
+        List<Patient> requestedAccountTermination = controller.getRequestingTermination();
+        if(requestedAccountTermination != null)
+        {
+            for(Patient patient : requestedAccountTermination)
+            {
+                Object[] obj = {patient.getUniqueID(), patient.getGivenName(), patient.getSurname()};
+                accountTerminationTableModel.addRow(obj); 
             }
         }
     }
@@ -179,7 +208,13 @@ public class SecretaryForm extends javax.swing.JFrame {
         txtUserIDToRemove = new javax.swing.JTextField();
         btnRemoveUserByID = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
+        tblRequestedTermination = new javax.swing.JTable();
+        jScrollPane6 = new javax.swing.JScrollPane();
         tblRemoveUsers = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtUserIDToTerminate = new javax.swing.JTextField();
+        btnApproveTermination = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         txtOrderMedacineName = new javax.swing.JTextField();
         spnOrderQuantity = new javax.swing.JSpinner();
@@ -547,6 +582,41 @@ public class SecretaryForm extends javax.swing.JFrame {
             }
         });
 
+        tblRequestedTermination.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblRequestedTermination.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "First Name", "Surname"
+            }
+        ));
+        jScrollPane4.setViewportView(tblRequestedTermination);
+
         tblRemoveUsers.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tblRemoveUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -580,34 +650,74 @@ public class SecretaryForm extends javax.swing.JFrame {
                 "ID", "First Name", "Surname"
             }
         ));
-        jScrollPane4.setViewportView(tblRemoveUsers);
+        jScrollPane6.setViewportView(tblRemoveUsers);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setText("Requesting termination");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Patients");
+
+        txtUserIDToTerminate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtUserIDToTerminate.setText("Insert user ID");
+
+        btnApproveTermination.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnApproveTermination.setText("Approve termination");
+        btnApproveTermination.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApproveTerminationActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout txtUserIDLayout = new javax.swing.GroupLayout(txtUserID);
         txtUserID.setLayout(txtUserIDLayout);
         txtUserIDLayout.setHorizontalGroup(
             txtUserIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, txtUserIDLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(txtUserIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtUserIDToRemove)
-                    .addComponent(btnRemoveUserByID, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(txtUserIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUserIDToRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(txtUserIDLayout.createSequentialGroup()
+                        .addGroup(txtUserIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtUserIDToTerminate)
+                            .addComponent(btnApproveTermination, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRemoveUserByID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(txtUserIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(19, 19, 19))
+            .addGroup(txtUserIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(txtUserIDLayout.createSequentialGroup()
+                    .addGap(310, 310, 310)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                    .addGap(20, 20, 20)))
         );
         txtUserIDLayout.setVerticalGroup(
             txtUserIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(txtUserIDLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addGap(33, 33, 33)
+                .addComponent(txtUserIDToRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(btnRemoveUserByID, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(txtUserIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(txtUserIDLayout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(txtUserIDToRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtUserIDToTerminate, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
-                        .addComponent(btnRemoveUserByID, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(txtUserIDLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(45, Short.MAX_VALUE))
+                        .addComponent(btnApproveTermination, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(28, 28, 28))
+            .addGroup(txtUserIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(txtUserIDLayout.createSequentialGroup()
+                    .addGap(32, 32, 32)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(253, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Account removal", txtUserID);
@@ -740,6 +850,10 @@ public class SecretaryForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         controller.approvePatient(txtUserIDToApprove.getText());
         resetTable();
+        resetAppointmentTable();
+        resetAccountRemovalTable();
+        resetAccountTerminationTable();
+        resetMedacinTable();
     }//GEN-LAST:event_btnApproveUserByIDActionPerformed
 
     private void btnCreateAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAppointmentActionPerformed
@@ -791,10 +905,25 @@ public class SecretaryForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         controller.removeUserByID(txtUserIDToRemove.getText());
         resetTable();
+        resetAppointmentTable();
+        resetAccountRemovalTable();
+        resetAccountTerminationTable();
+        resetMedacinTable();
     }//GEN-LAST:event_btnRemoveUserByIDActionPerformed
+
+    private void btnApproveTerminationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveTerminationActionPerformed
+        // TODO add your handling code here:
+        controller.terminateUserByID(txtUserIDToTerminate.getText());
+        resetTable();
+        resetAppointmentTable();
+        resetAccountRemovalTable();
+        resetAccountTerminationTable();
+        resetMedacinTable();
+    }//GEN-LAST:event_btnApproveTerminationActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnApproveTermination;
     private javax.swing.JButton btnApproveUserByID;
     private javax.swing.JButton btnCreateAppointment;
     private javax.swing.JButton btnGiveMedacine;
@@ -808,6 +937,8 @@ public class SecretaryForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -818,6 +949,7 @@ public class SecretaryForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblSurname;
@@ -827,6 +959,7 @@ public class SecretaryForm extends javax.swing.JFrame {
     private javax.swing.JTable tblAppointments;
     private javax.swing.JTable tblMedacineRequests;
     private javax.swing.JTable tblRemoveUsers;
+    private javax.swing.JTable tblRequestedTermination;
     private javax.swing.JTable tblUser;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtDoctor;
@@ -837,5 +970,6 @@ public class SecretaryForm extends javax.swing.JFrame {
     private javax.swing.JPanel txtUserID;
     private javax.swing.JTextField txtUserIDToApprove;
     private javax.swing.JTextField txtUserIDToRemove;
+    private javax.swing.JTextField txtUserIDToTerminate;
     // End of variables declaration//GEN-END:variables
 }
