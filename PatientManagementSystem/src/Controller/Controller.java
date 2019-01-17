@@ -153,6 +153,11 @@ public class Controller
         return secreteries;
     }
     
+    public List<Patient> getPatients()
+    {
+        return accountManager.getPatients();
+    }
+    
     public List<Patient> getRequestingAccount()
     {
         List<Patient> awaitingApproval = new ArrayList<Patient>();
@@ -255,5 +260,10 @@ public class Controller
         {
             secretaryPanel.MessagePopUp("No medacine with that name exists");
         }
+    }
+    
+    public List<Medacine> getMedacineToRestockList()
+    {
+        return medacineManager.getMedacineToRestock();
     }
 }

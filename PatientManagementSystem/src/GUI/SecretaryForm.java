@@ -7,6 +7,7 @@ package GUI;
 
 import Controller.Controller;
 import PatientManagementModel.Appointment;
+import PatientManagementModel.Medacine;
 import Users.Patient;
 import Users.User;
 import java.util.List;
@@ -20,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class SecretaryForm extends javax.swing.JFrame {
     
     Controller controller;
-    private DefaultTableModel tableModel;
+    private DefaultTableModel accountRequestTableModel, appointmentRequestTableModel, medacineRequestTableModel, accountRemovalTableModel;
     /**
      * Creates new form SecretaryForm
      */
@@ -41,9 +42,9 @@ public class SecretaryForm extends javax.swing.JFrame {
     public void resetTable()
     {
         String[] cols = {"ID", "First name", "Surname"};
-        tableModel = new DefaultTableModel(cols,0);
+        accountRequestTableModel = new DefaultTableModel(cols,0);
         
-        tblUser.setModel(tableModel);
+        tblUser.setModel(accountRequestTableModel);
         
         populateTable();
     }
@@ -56,7 +57,7 @@ public class SecretaryForm extends javax.swing.JFrame {
             for(User user : waitingForApproval)
             {
                 Object[] obj = {user.getUniqueID(), user.getGivenName(), user.getSurname()};
-                tableModel.addRow(obj);
+                accountRequestTableModel.addRow(obj);
             }
         }
     }
@@ -64,11 +65,11 @@ public class SecretaryForm extends javax.swing.JFrame {
     public void resetAppointmentTable()
     {
         String[] cols = {"Suggested by", "Doctor ID", "Patient ID", "Date"};
-        tableModel = new DefaultTableModel(cols,0);
+        appointmentRequestTableModel = new DefaultTableModel(cols,0);
         
-        tblUser.setModel(tableModel);
+        tblAppointments.setModel(appointmentRequestTableModel);
         
-        populateTable();
+        populateAppointmentTable();
     }
     
     public void populateAppointmentTable()
@@ -79,7 +80,53 @@ public class SecretaryForm extends javax.swing.JFrame {
             for(Appointment appointment : requestedAppointment)
             {
                 Object[] obj = {appointment.getProposedBy(), appointment.getDoctor(), appointment.getPatient(), appointment.getDate()};
-                tableModel.addRow(obj); 
+                appointmentRequestTableModel.addRow(obj); 
+            }
+        }
+    }
+    
+    public void resetAccountRemovalTable()
+    {
+        String[] cols = {"ID", "First Name", "Surname"};
+        accountRemovalTableModel = new DefaultTableModel(cols,0);
+        
+        tblRemoveUsers.setModel(accountRemovalTableModel);
+        
+        populateAccountRemovalTable();
+    }
+    
+    public void populateAccountRemovalTable()
+    {
+        List<Patient> patients = controller.getPatients();
+        if(patients != null)
+        {
+            for(Patient patient : patients)
+            {
+                Object[] obj = {patient.getUniqueID(), patient.getGivenName(), patient.getSurname()};
+                accountRemovalTableModel.addRow(obj); 
+            }
+        }
+    }
+    
+    public void resetMedacinTable()
+    {
+        String[] cols = {"Medacine Name", "Quantity"};
+        medacineRequestTableModel = new DefaultTableModel(cols,0);
+        
+        tblMedacineRequests.setModel(medacineRequestTableModel);
+        
+        populateMedacinTable();
+    }
+    
+    public void populateMedacinTable()
+    {
+        List<Medacine> medacineToRestock = controller.getMedacineToRestockList();
+        if(medacineToRestock != null)
+        {
+            for(Medacine medacine : medacineToRestock)
+            {
+                Object[] obj = {medacine.getName(), medacine.getStock()};
+                medacineRequestTableModel.addRow(obj); 
             }
         }
     }
@@ -113,7 +160,7 @@ public class SecretaryForm extends javax.swing.JFrame {
         btnApproveUserByID = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblUser1 = new javax.swing.JTable();
+        tblAppointments = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         txtDate = new javax.swing.JTextField();
         txtDoctor = new javax.swing.JTextField();
@@ -128,17 +175,19 @@ public class SecretaryForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnGiveMedacine = new javax.swing.JButton();
-        jPanel7 = new javax.swing.JPanel();
+        txtUserID = new javax.swing.JPanel();
         txtUserIDToRemove = new javax.swing.JTextField();
         btnRemoveUserByID = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        tblUser2 = new javax.swing.JTable();
+        tblRemoveUsers = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         txtOrderMedacineName = new javax.swing.JTextField();
         spnOrderQuantity = new javax.swing.JSpinner();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnOrderMedacine = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblMedacineRequests = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -283,8 +332,8 @@ public class SecretaryForm extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Account requests", jPanel2);
 
-        tblUser1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tblUser1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAppointments.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblAppointments.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -331,7 +380,7 @@ public class SecretaryForm extends javax.swing.JFrame {
                 "Suggested by", "Doctor", "Patient", "Date"
             }
         ));
-        jScrollPane3.setViewportView(tblUser1);
+        jScrollPane3.setViewportView(tblAppointments);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -498,8 +547,8 @@ public class SecretaryForm extends javax.swing.JFrame {
             }
         });
 
-        tblUser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tblUser2.setModel(new javax.swing.table.DefaultTableModel(
+        tblRemoveUsers.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblRemoveUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -531,37 +580,37 @@ public class SecretaryForm extends javax.swing.JFrame {
                 "ID", "First Name", "Surname"
             }
         ));
-        jScrollPane4.setViewportView(tblUser2);
+        jScrollPane4.setViewportView(tblRemoveUsers);
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout txtUserIDLayout = new javax.swing.GroupLayout(txtUserID);
+        txtUserID.setLayout(txtUserIDLayout);
+        txtUserIDLayout.setHorizontalGroup(
+            txtUserIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, txtUserIDLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(txtUserIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtUserIDToRemove)
                     .addComponent(btnRemoveUserByID, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+        txtUserIDLayout.setVerticalGroup(
+            txtUserIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(txtUserIDLayout.createSequentialGroup()
+                .addGroup(txtUserIDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(txtUserIDLayout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(txtUserIDToRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
                         .addComponent(btnRemoveUserByID, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGroup(txtUserIDLayout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Account removal", jPanel7);
+        jTabbedPane1.addTab("Account removal", txtUserID);
 
         txtOrderMedacineName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtOrderMedacineName.setText("Medacine name");
@@ -587,12 +636,47 @@ public class SecretaryForm extends javax.swing.JFrame {
             }
         });
 
+        tblMedacineRequests.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblMedacineRequests.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Medacine name", "Quantity"
+            }
+        ));
+        jScrollPane5.setViewportView(tblMedacineRequests);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(234, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnOrderMedacine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -603,12 +687,14 @@ public class SecretaryForm extends javax.swing.JFrame {
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(spnOrderQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5))))
-                .addGap(298, 298, 298))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(116, 116, 116))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(102, 102, 102)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel7))
@@ -618,7 +704,11 @@ public class SecretaryForm extends javax.swing.JFrame {
                     .addComponent(txtOrderMedacineName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(71, 71, 71)
                 .addComponent(btnOrderMedacine, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
 
         jTabbedPane1.addTab("Order medacine", jPanel6);
@@ -701,8 +791,6 @@ public class SecretaryForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         controller.removeUserByID(txtUserIDToRemove.getText());
         resetTable();
-        populateComboBox();
-        populateFeedbackComboBox();
     }//GEN-LAST:event_btnRemoveUserByIDActionPerformed
 
     
@@ -726,25 +814,27 @@ public class SecretaryForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblSurname;
     private javax.swing.JLabel lblUserID;
     private javax.swing.JSpinner spnOrderQuantity;
     private javax.swing.JSpinner spnQuantity;
+    private javax.swing.JTable tblAppointments;
+    private javax.swing.JTable tblMedacineRequests;
+    private javax.swing.JTable tblRemoveUsers;
     private javax.swing.JTable tblUser;
-    private javax.swing.JTable tblUser1;
-    private javax.swing.JTable tblUser2;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtDoctor;
     private javax.swing.JTextField txtMedacineName;
     private javax.swing.JTextField txtOrderMedacineName;
     private javax.swing.JTextField txtPatient;
     private javax.swing.JTextField txtPatientID;
+    private javax.swing.JPanel txtUserID;
     private javax.swing.JTextField txtUserIDToApprove;
     private javax.swing.JTextField txtUserIDToRemove;
     // End of variables declaration//GEN-END:variables

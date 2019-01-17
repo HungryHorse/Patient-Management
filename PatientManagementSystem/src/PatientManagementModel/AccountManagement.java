@@ -314,8 +314,8 @@ public class AccountManagement
         return doctors;
     }
     
-    public void givePatientMedacine()
+    public List<Patient> getPatients()
     {
-        
+        return patients;
     }
 }

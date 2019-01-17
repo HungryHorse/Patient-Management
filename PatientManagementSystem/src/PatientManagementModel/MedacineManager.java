@@ -23,6 +23,10 @@ public class MedacineManager
         return medacineList;
     }
     
+    public List<Medacine> getMedacineToRestock()
+    {
+        return medacineToRestock;
+    }
     
     public void givePatientMedacine(Medacine medacine, int Quantity)
     {
