@@ -23,6 +23,12 @@ public class MedacineManager
         return medacineList;
     }
     
+    
+    public void givePatientMedacine(Medacine medacine, int Quantity)
+    {
+        medacine.setStock(medacine.getStock() - Quantity);
+    }
+    
     /**
      *
      * @param medacine
@@ -57,5 +63,10 @@ public class MedacineManager
             }
         }
         return null;
+    }
+    
+    public void orderMedacine(Medacine medacine, int Quantity)
+    {
+        medacine.setStock(medacine.getStock() + Quantity);
     }
 }

@@ -10,6 +10,7 @@ import PatientManagementModel.Appointment;
 import Users.Patient;
 import Users.User;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -82,6 +83,12 @@ public class SecretaryForm extends javax.swing.JFrame {
             }
         }
     }
+    
+    public void MessagePopUp(String message)
+    {
+        JOptionPane.showMessageDialog(null, message);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -114,8 +121,24 @@ public class SecretaryForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnCreateAppointment = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        txtMedacineName = new javax.swing.JTextField();
+        txtPatientID = new javax.swing.JTextField();
+        spnQuantity = new javax.swing.JSpinner();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        btnGiveMedacine = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
+        txtUserIDToRemove = new javax.swing.JTextField();
+        btnRemoveUserByID = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblUser2 = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        txtOrderMedacineName = new javax.swing.JTextField();
+        spnOrderQuantity = new javax.swing.JSpinner();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        btnOrderMedacine = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -389,44 +412,216 @@ public class SecretaryForm extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Create appointment", jPanel4);
 
+        txtMedacineName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtMedacineName.setText("Medacine name");
+        txtMedacineName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMedacineNameActionPerformed(evt);
+            }
+        });
+
+        txtPatientID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtPatientID.setText("Patient ID");
+        txtPatientID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPatientIDActionPerformed(evt);
+            }
+        });
+
+        spnQuantity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Patient ID");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("Quantity");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Medacine name");
+
+        btnGiveMedacine.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnGiveMedacine.setText("Give medacine");
+        btnGiveMedacine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGiveMedacineActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 838, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnGiveMedacine, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                    .addComponent(txtPatientID)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtMedacineName, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spnQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 465, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spnQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPatientID, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMedacineName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(64, 64, 64)
+                .addComponent(btnGiveMedacine, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(234, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Give medacine", jPanel5);
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 838, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 465, Short.MAX_VALUE)
-        );
+        txtUserIDToRemove.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtUserIDToRemove.setText("Insert user ID");
 
-        jTabbedPane1.addTab("Order medacine", jPanel6);
+        btnRemoveUserByID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnRemoveUserByID.setText("Remove user by ID");
+        btnRemoveUserByID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveUserByIDActionPerformed(evt);
+            }
+        });
+
+        tblUser2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tblUser2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "First Name", "Surname"
+            }
+        ));
+        jScrollPane4.setViewportView(tblUser2);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 838, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtUserIDToRemove)
+                    .addComponent(btnRemoveUserByID, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 465, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(txtUserIDToRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(btnRemoveUserByID, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Account removal", jPanel7);
+
+        txtOrderMedacineName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtOrderMedacineName.setText("Medacine name");
+        txtOrderMedacineName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOrderMedacineNameActionPerformed(evt);
+            }
+        });
+
+        spnOrderQuantity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Quantity");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setText("Medacine name");
+
+        btnOrderMedacine.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnOrderMedacine.setText("Order medacine");
+        btnOrderMedacine.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrderMedacineActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(234, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnOrderMedacine, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtOrderMedacineName, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(spnOrderQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))))
+                .addGap(298, 298, 298))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spnOrderQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtOrderMedacineName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71)
+                .addComponent(btnOrderMedacine, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(200, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Order medacine", jPanel6);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -462,13 +657,69 @@ public class SecretaryForm extends javax.swing.JFrame {
         controller.CreateAppointment(txtDoctor.getText(), txtPatient.getText(), txtDate.getText());
     }//GEN-LAST:event_btnCreateAppointmentActionPerformed
 
+    private void txtMedacineNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMedacineNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMedacineNameActionPerformed
+
+    private void txtPatientIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPatientIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPatientIDActionPerformed
+
+    private void btnGiveMedacineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiveMedacineActionPerformed
+        // TODO add your handling code here:
+        int quantity = 0;
+        try
+        {
+            spnQuantity.commitEdit();
+        }
+        catch(java.text.ParseException e)
+        {
+            quantity = (Integer) spnQuantity.getValue();
+        }
+        controller.giveMedacine(txtMedacineName.getText(), quantity);
+    }//GEN-LAST:event_btnGiveMedacineActionPerformed
+
+    private void txtOrderMedacineNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrderMedacineNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOrderMedacineNameActionPerformed
+
+    private void btnOrderMedacineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderMedacineActionPerformed
+        // TODO add your handling code here:
+        int quantity = 0;
+        try
+        {
+            spnOrderQuantity.commitEdit();
+        }
+        catch(java.text.ParseException e)
+        {
+            quantity = (Integer) spnOrderQuantity.getValue();
+        }
+        controller.orderMedacine(txtOrderMedacineName.getText(), quantity);
+    }//GEN-LAST:event_btnOrderMedacineActionPerformed
+
+    private void btnRemoveUserByIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveUserByIDActionPerformed
+        // TODO add your handling code here:
+        controller.removeUserByID(txtUserIDToRemove.getText());
+        resetTable();
+        populateComboBox();
+        populateFeedbackComboBox();
+    }//GEN-LAST:event_btnRemoveUserByIDActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApproveUserByID;
     private javax.swing.JButton btnCreateAppointment;
+    private javax.swing.JButton btnGiveMedacine;
     private javax.swing.JButton btnLogOff;
+    private javax.swing.JButton btnOrderMedacine;
+    private javax.swing.JButton btnRemoveUserByID;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -478,15 +729,23 @@ public class SecretaryForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblSurname;
     private javax.swing.JLabel lblUserID;
+    private javax.swing.JSpinner spnOrderQuantity;
+    private javax.swing.JSpinner spnQuantity;
     private javax.swing.JTable tblUser;
     private javax.swing.JTable tblUser1;
+    private javax.swing.JTable tblUser2;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtDoctor;
+    private javax.swing.JTextField txtMedacineName;
+    private javax.swing.JTextField txtOrderMedacineName;
     private javax.swing.JTextField txtPatient;
+    private javax.swing.JTextField txtPatientID;
     private javax.swing.JTextField txtUserIDToApprove;
+    private javax.swing.JTextField txtUserIDToRemove;
     // End of variables declaration//GEN-END:variables
 }

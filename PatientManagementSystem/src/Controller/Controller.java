@@ -223,4 +223,37 @@ public class Controller
     {
         doctor.addFeedback(feedback);
     }
+    
+    public void giveMedacine(String medacineName, int quantity)
+    {
+        Medacine medacine = medacineManager.findMedacine(medacineName);
+        if(medacine != null)
+        {
+            if(medacine.getStock() > quantity)
+            {
+                medacineManager.givePatientMedacine(medacine, quantity);
+            }
+            else
+            {
+                secretaryPanel.MessagePopUp("Not enough medacine in stock");
+            }
+        }
+        else
+        {
+            secretaryPanel.MessagePopUp("No medacine with that name exists");
+        }
+    }
+    
+    public void orderMedacine(String medacineName, int quantity)
+    {
+        Medacine medacine = medacineManager.findMedacine(medacineName);
+        if(medacine != null)
+        {
+            medacineManager.orderMedacine(medacine, quantity);
+        }
+        else
+        {
+            secretaryPanel.MessagePopUp("No medacine with that name exists");
+        }
+    }
 }

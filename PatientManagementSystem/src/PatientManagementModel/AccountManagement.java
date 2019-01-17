@@ -313,4 +313,9 @@ public class AccountManagement
         }
         return doctors;
     }
+    
+    public void givePatientMedacine()
+    {
+        
+    }
 }
