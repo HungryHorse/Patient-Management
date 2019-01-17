@@ -15,6 +15,7 @@ public class LoginRegister extends javax.swing.JFrame {
     private Controller controller;
     /**
      * Creates new form LoginRegister
+     * @param controller
      */
     public LoginRegister(Controller controller) 
     {
@@ -22,16 +23,28 @@ public class LoginRegister extends javax.swing.JFrame {
         this.controller = controller;
     }
     
+    /**
+     *
+     * @param message
+     */
     public void MessagePopUp(String message)
     {
         JOptionPane.showMessageDialog(null, message);
     }
     
+    /**
+     *
+     * @param ID
+     */
     public void showGeneratedIDUser(String ID)
     {
         lblUserID.setText("Your user ID is: "+ ID);
     }
     
+    /**
+     *
+     * @param ID
+     */
     public void showGeneratedIDAdmin(String ID)
     {
         lblAdminID.setText("Your user ID is: "+ ID);

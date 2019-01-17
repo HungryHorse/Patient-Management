@@ -25,6 +25,11 @@ public class Controller
     private AccountManagement accountManager;
     private MedacineManager medacineManager;
 
+    /**
+     *
+     * @param accountManager
+     * @param medacineManager
+     */
     public Controller(AccountManagement accountManager, MedacineManager medacineManager) 
     {
         this.accountManager = accountManager;
@@ -32,11 +37,20 @@ public class Controller
         loginPanel.setVisible(true);
     }
     
+    /**
+     *
+     * @return
+     */
     public User populateWelcomePage()
     {
         return currentlyLogedInOnPC;
     }
  
+    /**
+     *
+     * @param ID
+     * @param Password
+     */
     public void LoginBtnPressed(String ID, String Password)
     {
         Boolean loginSuccess = false;
@@ -65,10 +79,12 @@ public class Controller
                     case 'D':
                         loginPanel.setVisible(false);
                         doctorPanel.setVisible(true);
+                        adminPanel.setWelcomePage();
                         break;
                     case 'S':
                         loginPanel.setVisible(false);
                         secretaryPanel.setVisible(true);
+                        adminPanel.setWelcomePage();
                         break;
                     case 'A':
                         loginPanel.setVisible(false);
@@ -88,6 +104,9 @@ public class Controller
         }
     }
     
+    /**
+     *
+     */
     public void logOut()
     {
         switch (accountManager.findIDType(currentlyLogedInOnPC))
@@ -112,6 +131,15 @@ public class Controller
         
     }
     
+    /**
+     *
+     * @param name
+     * @param surname
+     * @param age
+     * @param address
+     * @param gender
+     * @param password
+     */
     public void registerBtnPressed(String name, String surname, int age, String address, String gender, String password)
     {
         Patient newPatient = new Patient(password, name, surname, address, age, gender, accountManager);
@@ -119,6 +147,14 @@ public class Controller
         loginPanel.showGeneratedIDUser(newPatient.getUniqueID());
     }
     
+    /**
+     *
+     * @param name
+     * @param surname
+     * @param address
+     * @param password
+     * @param adminPass
+     */
     public void registerAdminBtnPressed(String name, String surname, String address, String password, String adminPass)
     {
         if(adminPass.equals(accountManager.getAdminPass()))
@@ -133,6 +169,10 @@ public class Controller
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public List<User> getDoctors()
     {
         List<User> doctors = new ArrayList<User>();
@@ -143,6 +183,10 @@ public class Controller
         return doctors;
    }
     
+    /**
+     *
+     * @return
+     */
     public List<User> getSecretaries()
     {
         List<User> secreteries = new ArrayList<User>();
@@ -153,11 +197,19 @@ public class Controller
         return secreteries;
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Patient> getPatients()
     {
         return accountManager.getPatients();
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Patient> getRequestingAccount()
     {
         List<Patient> awaitingApproval = new ArrayList<Patient>();
@@ -168,6 +220,10 @@ public class Controller
         return awaitingApproval;
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Patient> getRequestingTermination()
     {
         List<Patient> requestedAccountTermination = new ArrayList<Patient>();
@@ -178,17 +234,31 @@ public class Controller
         return requestedAccountTermination;
     }
     
+    /**
+     *
+     * @param ID
+     */
     public void approvePatient(String ID)
     {
         Patient patient = accountManager.findPatientByID(ID);
         accountManager.approveAccout(patient);
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Appointment> getRequestedAppointments()
     {
         return accountManager.getRequestedAppointments();
     }
     
+    /**
+     *
+     * @param DoctorID
+     * @param PatientID
+     * @param date
+     */
     public void CreateAppointment(String DoctorID, String PatientID, String date)
     {
         Doctor attendingDoctor = accountManager.findDoctorByID(DoctorID);
@@ -197,41 +267,76 @@ public class Controller
         accountManager.addAppointment(attendingDoctor, attendingPatient, appointment);
     }
     
+    /**
+     *
+     * @param ID
+     */
     public void removeUserByID(String ID)
     {
        User user = accountManager.findByID(ID);
        accountManager.removeAccount(user);
     }
     
+    /**
+     *
+     * @param ID
+     */
     public void terminateUserByID(String ID)
     {
         Patient patient = accountManager.findPatientByID(ID);
         accountManager.approveTermination(patient);
     }
     
+    /**
+     *
+     * @param ID
+     * @return
+     */
     public User getUserByID(String ID)
     {
        User user = accountManager.findByID(ID);
        return user;
     }
     
+    /**
+     *
+     * @param ID
+     * @return
+     */
     public Patient getPatientByID(String ID)
     {
        Patient patient = accountManager.findPatientByID(ID);
        return patient;
     }
     
+    /**
+     *
+     * @param ID
+     * @return
+     */
     public Doctor getDoctorByID(String ID)
     {
        Doctor doctor = accountManager.findDoctorByID(ID);
        return doctor;
     }
     
+    /**
+     *
+     * @param doctor
+     * @return
+     */
     public List<String> getDoctorRatings(Doctor doctor)
     {
         return doctor.getRatings();
     }
     
+    /**
+     *
+     * @param name
+     * @param surname
+     * @param address
+     * @param password
+     */
     public void CreateDoctor(String name, String surname, String address, String password)
     {
         Doctor doctor = new Doctor(accountManager, medacineManager ,name, surname, address, password);
@@ -239,6 +344,13 @@ public class Controller
         adminPanel.showGeneratedDoctorID(doctor.getUniqueID());
     }
     
+    /**
+     *
+     * @param name
+     * @param surname
+     * @param address
+     * @param password
+     */
     public void CreateSecretary(String name, String surname, String address, String password)
     {
         Secretary secretary = new Secretary(accountManager, medacineManager ,name, surname, address, password);
@@ -246,11 +358,21 @@ public class Controller
         adminPanel.showGeneratedSecretaryID(secretary.getUniqueID());
     }
     
+    /**
+     *
+     * @param feedback
+     * @param doctor
+     */
     public void submitFeedback(String feedback, Doctor doctor)
     {
         doctor.addFeedback(feedback);
     }
     
+    /**
+     *
+     * @param medacineName
+     * @param quantity
+     */
     public void giveMedacine(String medacineName, int quantity)
     {
         Medacine medacine = medacineManager.findMedacine(medacineName);
@@ -271,6 +393,11 @@ public class Controller
         }
     }
     
+    /**
+     *
+     * @param medacineName
+     * @param quantity
+     */
     public void orderMedacine(String medacineName, int quantity)
     {
         Medacine medacine = medacineManager.findMedacine(medacineName);
@@ -284,11 +411,22 @@ public class Controller
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Medacine> getMedacineToRestockList()
     {
         return medacineManager.getMedacineToRestock();
     }
     
+    /**
+     *
+     * @param user
+     * @param DoctorID
+     * @param PatientID
+     * @param date
+     */
     public void proposeAppointment(User user, String DoctorID, String PatientID, String date)
     {
         Doctor attendingDoctor = accountManager.findDoctorByID(DoctorID);
@@ -297,6 +435,10 @@ public class Controller
         accountManager.requestAppointment(appointment);
     }
     
+    /**
+     *
+     * @param name
+     */
     public void createMedacine(String name)
     {
         Medacine newMedacine = new Medacine(name);

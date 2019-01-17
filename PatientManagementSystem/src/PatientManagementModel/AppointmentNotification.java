@@ -24,6 +24,9 @@ public class AppointmentNotification extends Notification
         super();
     }
     
+    /**
+     *
+     */
     public void requestedAppointment()
     {
         this.notificationMessage = "New Appointment Requested";

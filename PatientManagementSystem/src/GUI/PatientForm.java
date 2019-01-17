@@ -10,6 +10,7 @@ import PatientManagementModel.Appointment;
 import Users.Doctor;
 import Users.User;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -24,12 +25,16 @@ public class PatientForm extends javax.swing.JPanel {
     User user;
     /**
      * Creates new form PatientForm
+     * @param controller
      */
     public PatientForm(Controller controller) {
         initComponents();
         this.controller = controller;
     }
     
+    /**
+     *
+     */
     public void setWelcomePage()
     {
         user = controller.populateWelcomePage();
@@ -44,8 +49,28 @@ public class PatientForm extends javax.swing.JPanel {
         lblPatientAge.setText(Integer.toString(appointment.getPatient().GetDOB()));
         lblPatientGender.setText(appointment.getPatient().GetGender());
         lblPatientName.setText(appointment.getPatient().getGivenName() + " " + appointment.getPatient().getSurname());
+        
+        if(user.getNotifications().size() > 0)
+        {
+            for(String notificationMessage : user.getNotifications())
+            {
+                MessagePopUp(notificationMessage);
+            }
+        }
     }
     
+    /**
+     *
+     * @param message
+     */
+    public void MessagePopUp(String message)
+    {
+        JOptionPane.showMessageDialog(null, message);
+    }
+    /**
+     *
+     * @param ID
+     */
     public void resetPatientHistoryTable(String ID)
     {
         String[] cols = {"Doctor", "Notes", "Perscription"};
@@ -56,6 +81,9 @@ public class PatientForm extends javax.swing.JPanel {
         populatePatientHistoryTable();
     }
     
+    /**
+     *
+     */
     public void populatePatientHistoryTable()
     {
         List<Appointment> appointmentHistory = controller.getPatientByID(user.getUniqueID()).getHistory();

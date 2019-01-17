@@ -34,22 +34,42 @@ public class Perscription
         this.dosage = dosage;
     }
 
+    /**
+     *
+     * @return
+     */
     public Medacine getMedacinePrescribed() {
         return medacinePrescribed;
     }
 
+    /**
+     *
+     * @return
+     */
     public Doctor getDoctor() {
         return doctor;
     }
 
+    /**
+     *
+     * @return
+     */
     public Patient getPatient() {
         return patient;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getQuantity() {
         return quantity;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDosage() {
         return dosage;
     }

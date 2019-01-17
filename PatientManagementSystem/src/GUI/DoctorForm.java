@@ -13,6 +13,7 @@ import Users.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -29,6 +30,8 @@ public class DoctorForm extends javax.swing.JFrame {
     private DefaultTableModel tableModel, historyModel;
     /**
      * Creates new form DoctorForml
+     * @param controller
+     * @param medacineManager
      */
     public DoctorForm(Controller controller, MedacineManager medacineManager) {
         initComponents();
@@ -36,6 +39,9 @@ public class DoctorForm extends javax.swing.JFrame {
         this.medacineManager = medacineManager;
     }
     
+    /**
+     *
+     */
     public void setWelcomePage()
     {
         this.user = controller.populateWelcomePage();
@@ -43,9 +49,29 @@ public class DoctorForm extends javax.swing.JFrame {
         lblSurname.setText("Surname: " + user.getSurname());
         lblUserID.setText("User ID: " + user.getUniqueID());
         
+        if(user.getNotifications().size() > 0)
+        {
+            for(String notificationMessage : user.getNotifications())
+            {
+                MessagePopUp(notificationMessage);
+            }
+        }
+        
         resetTable();
     }
     
+    /**
+     *
+     * @param message
+     */
+    public void MessagePopUp(String message)
+    {
+        JOptionPane.showMessageDialog(null, message);
+    }
+    
+    /**
+     *
+     */
     public void resetTable()
     {
         String[] cols = {"Index", "Patient", "Date"};
@@ -57,6 +83,9 @@ public class DoctorForm extends javax.swing.JFrame {
         populateComboBox();
     }
     
+    /**
+     *
+     */
     public void populateTable()
     {
         List<Appointment> appointments = controller.getDoctorByID(user.getUniqueID()).getAppointments();
@@ -72,6 +101,9 @@ public class DoctorForm extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *
+     */
     public void populateComboBox()
     {
         
@@ -91,6 +123,9 @@ public class DoctorForm extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *
+     */
     public void populatePatientComboBox()
     {
         
@@ -108,6 +143,10 @@ public class DoctorForm extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *
+     * @param ID
+     */
     public void resetPatientHistoryTable(String ID)
     {
         String[] cols = {"Doctor", "Notes", "Perscription"};
@@ -118,6 +157,10 @@ public class DoctorForm extends javax.swing.JFrame {
         populatePatientHistoryTable(ID);
     }
     
+    /**
+     *
+     * @param ID
+     */
     public void populatePatientHistoryTable(String ID)
     {
         List<Appointment> appointmentHistory = controller.getPatientByID(ID).getHistory();

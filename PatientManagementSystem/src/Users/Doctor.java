@@ -25,6 +25,7 @@ public class Doctor extends User
      * @param password
      * @param givenName
      * @param surname
+     * @param address
      */
     public Doctor(AccountManagement accountManager,MedacineManager medacineManager, String password, String givenName, String surname, String address)
     {
@@ -46,6 +47,10 @@ public class Doctor extends User
         appointment.makeNote(note);
     }
     
+    /**
+     *
+     * @param appointment
+     */
     public void attendAppointment(Appointment appointment)
     {
         appointments.remove(appointment);
@@ -61,6 +66,10 @@ public class Doctor extends User
         appointment.addPerscription(perscription);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Appointment> getAppointments()
     {
         return appointments;
@@ -87,6 +96,11 @@ public class Doctor extends User
         accountManager.requestAppointment(newAppointment);
     }
     
+    /**
+     *
+     * @param patient
+     * @param date
+     */
     public void createAppointment(Patient patient, String date)
     {
         Appointment newAppointment = new Appointment(this, this, patient, date);
@@ -174,10 +188,11 @@ public class Doctor extends User
     
     /**
      *
+     * @param notificationMessage
      */
     @Override
     public void update(String notificationMessage)
     {
-        
+        this.notifications.add(notificationMessage);
     }
 }

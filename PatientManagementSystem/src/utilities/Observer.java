@@ -14,6 +14,7 @@ public interface Observer
 
     /**
      *
+     * @param notifcationMessage
      */
     void update(String notifcationMessage);
 }

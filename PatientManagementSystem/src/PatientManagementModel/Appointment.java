@@ -47,22 +47,42 @@ public class Appointment
         this.proposedBy = proposedBy;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNotes() {
         return notes;
     }    
     
+    /**
+     *
+     * @return
+     */
     public User getProposedBy() {
         return proposedBy;
     }
 
+    /**
+     *
+     * @return
+     */
     public Doctor getDoctor() {
         return doctor;
     }
 
+    /**
+     *
+     * @return
+     */
     public Patient getPatient() {
         return patient;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getDate() {
         return date;
     }

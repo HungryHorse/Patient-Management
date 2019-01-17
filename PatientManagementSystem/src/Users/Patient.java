@@ -30,9 +30,10 @@ public class Patient extends User
      * @param password
      * @param givenName
      * @param surname
-     * @param adress
+     * @param address
      * @param age
      * @param gender
+     * @param accountManager
      */
     public  Patient(String password, String givenName, String surname, String address, int age, String gender, AccountManagement accountManager)
     {
@@ -46,6 +47,9 @@ public class Patient extends User
         RequestAccount();
     }
     
+    /**
+     *
+     */
     public void RequestAccount()
     {
         accountManager.requestAccount(this); 
@@ -152,6 +156,10 @@ public class Patient extends User
         this.currentPerscription = perscription;
     }
     
+    /**
+     *
+     * @param appointment
+     */
     public void addAppointmentToHistory(Appointment appointment)
     {
         history.add(appointment);
@@ -159,10 +167,11 @@ public class Patient extends User
     
     /**
      *
+     * @param notificationMessage
      */
     @Override
     public void update(String notificationMessage)
     {
-        
+        this.notifications.add(notificationMessage);
     }
 }

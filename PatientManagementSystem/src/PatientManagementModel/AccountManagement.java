@@ -20,8 +20,10 @@ public class AccountManagement
     private List<User> accounts = new ArrayList<User>();
     private List<Doctor> doctors = new ArrayList<Doctor>();
     private List<Patient> patients = new ArrayList<Patient>();
+    MedacineManager medacineManager;
     private AppointmentNotification appointmentNotification = new AppointmentNotification();
     private AccountNotification accountNotification = new AccountNotification();
+    private MedacineNotification medacineNotification = new MedacineNotification();
     private int noOfDoctors = 0;
     private int noOfPatients = 0;
     private int noOfSecretaries = 0;
@@ -33,11 +35,24 @@ public class AccountManagement
      */
     public AccountManagement() 
     {
-        instantiated = true; 
+        instantiated = true;
+        medacineManager = new MedacineManager(medacineNotification);
     }
     
+    /**
+     *
+     * @return
+     */
     public String getAdminPass() {
         return AdminPass;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public MedacineManager getMedacineManager() {
+        return medacineManager;
     }
     
     /**
@@ -100,6 +115,9 @@ public class AccountManagement
     {
         accounts.add(secretary);
         secretary.setUniqueID(createID("secretary"));
+        appointmentNotification.registerObserver(secretary);
+        accountNotification.registerObserver(secretary);
+        medacineNotification.registerObserver(secretary);
     }
     
     /**
@@ -134,7 +152,7 @@ public class AccountManagement
     
     /**
      *
-     * @param patientToRemove
+     * @param userToRemove
      */
     public void removeAccount(User userToRemove)
     {
@@ -212,6 +230,11 @@ public class AccountManagement
         return userFound;
     }
     
+    /**
+     *
+     * @param IDToFind
+     * @return
+     */
     public Doctor findDoctorByID(String IDToFind)
     {
         Doctor doctorFound = null;
@@ -227,6 +250,11 @@ public class AccountManagement
         return doctorFound;
     }
     
+    /**
+     *
+     * @param IDToFind
+     * @return
+     */
     public Patient findPatientByID(String IDToFind)
     {
         Patient patientFound = null;
@@ -268,6 +296,13 @@ public class AccountManagement
         return requestedAccountTermination;
     }
     
+    /**
+     *
+     * @param attendingDoctor
+     * @param attendingPatient
+     * @param date
+     * @return
+     */
     public Appointment createAppointment(Doctor attendingDoctor, Patient attendingPatient, String date)
     {
         Appointment appointment = new Appointment(attendingDoctor, attendingPatient, date);
@@ -287,12 +322,21 @@ public class AccountManagement
         appointmentNotification.addAppointment(attendingPatient, attendingDoctor);
     }
     
+    /**
+     *
+     * @param user
+     * @return
+     */
     public char findIDType(User user)
     {
         char IDType = user.getUniqueID().charAt(0);
         return IDType;
     }
     
+    /**
+     *
+     * @return
+     */
     public List<User> getSecretaries()
     {
         List<User> secretaries = new ArrayList<User>();
@@ -306,6 +350,10 @@ public class AccountManagement
         return secretaries;
     }
     
+    /**
+     *
+     * @return
+     */
     public ArrayList<User> getDoctors()
     {
         ArrayList<User> doctors = new ArrayList<User>();
@@ -319,6 +367,10 @@ public class AccountManagement
         return doctors;
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Patient> getPatients()
     {
         return patients;

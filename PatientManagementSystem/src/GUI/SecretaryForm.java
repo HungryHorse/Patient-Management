@@ -24,6 +24,7 @@ public class SecretaryForm extends javax.swing.JFrame {
     private DefaultTableModel accountRequestTableModel, appointmentRequestTableModel, medacineRequestTableModel, accountRemovalTableModel, accountTerminationTableModel;
     /**
      * Creates new form SecretaryForm
+     * @param controller
      */
     public SecretaryForm(Controller controller) 
     {
@@ -31,6 +32,9 @@ public class SecretaryForm extends javax.swing.JFrame {
         this.controller = controller;
     }
     
+    /**
+     *
+     */
     public void setWelcomePage()
     {
         User user = controller.populateWelcomePage();
@@ -43,8 +47,29 @@ public class SecretaryForm extends javax.swing.JFrame {
         resetAccountRemovalTable();
         resetAccountTerminationTable();
         resetMedacinTable();
+        
+        if(user.getNotifications().size() > 0)
+        {
+            for(String notificationMessage : user.getNotifications())
+            {
+                MessagePopUp(notificationMessage);
+            }
+        }
+        
+        resetTable();
     }
     
+    /**
+     *
+     * @param message
+     */
+    public void MessagePopUp(String message)
+    {
+        JOptionPane.showMessageDialog(null, message);
+    }
+    /**
+     *
+     */
     public void resetTable()
     {
         String[] cols = {"ID", "First name", "Surname"};
@@ -55,6 +80,9 @@ public class SecretaryForm extends javax.swing.JFrame {
         populateTable();
     }
     
+    /**
+     *
+     */
     public void populateTable()
     {
         List<Patient> waitingForApproval = controller.getRequestingAccount();
@@ -68,6 +96,9 @@ public class SecretaryForm extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *
+     */
     public void resetAppointmentTable()
     {
         String[] cols = {"Suggested by", "Doctor ID", "Patient ID", "Date"};
@@ -78,6 +109,9 @@ public class SecretaryForm extends javax.swing.JFrame {
         populateAppointmentTable();
     }
     
+    /**
+     *
+     */
     public void populateAppointmentTable()
     {
         List<Appointment> requestedAppointment = controller.getRequestedAppointments();
@@ -91,6 +125,9 @@ public class SecretaryForm extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *
+     */
     public void resetAccountRemovalTable()
     {
         String[] cols = {"ID", "First Name", "Surname"};
@@ -101,6 +138,9 @@ public class SecretaryForm extends javax.swing.JFrame {
         populateAccountRemovalTable();
     }
     
+    /**
+     *
+     */
     public void populateAccountRemovalTable()
     {
         List<Patient> patients = controller.getPatients();
@@ -114,6 +154,9 @@ public class SecretaryForm extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *
+     */
     public void resetAccountTerminationTable()
     {
         String[] cols = {"ID", "First Name", "Surname"};
@@ -124,6 +167,9 @@ public class SecretaryForm extends javax.swing.JFrame {
         populateAccountRemovalTable();
     }
     
+    /**
+     *
+     */
     public void populateAccountTerminationTable()
     {
         List<Patient> requestedAccountTermination = controller.getRequestingTermination();
@@ -137,6 +183,9 @@ public class SecretaryForm extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *
+     */
     public void resetMedacinTable()
     {
         String[] cols = {"Medacine Name", "Quantity"};
@@ -147,6 +196,9 @@ public class SecretaryForm extends javax.swing.JFrame {
         populateMedacinTable();
     }
     
+    /**
+     *
+     */
     public void populateMedacinTable()
     {
         List<Medacine> medacineToRestock = controller.getMedacineToRestockList();
@@ -158,13 +210,7 @@ public class SecretaryForm extends javax.swing.JFrame {
                 medacineRequestTableModel.addRow(obj); 
             }
         }
-    }
-    
-    public void MessagePopUp(String message)
-    {
-        JOptionPane.showMessageDialog(null, message);
-    }
-    
+    }   
 
     /**
      * This method is called from within the constructor to initialize the form.

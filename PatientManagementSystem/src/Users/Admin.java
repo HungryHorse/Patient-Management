@@ -21,6 +21,7 @@ public class Admin extends User
      * @param password
      * @param givenName
      * @param surname
+     * @param address
      */
     public Admin(AccountManagement accountManager,MedacineManager medacineManager, String password, String givenName, String surname, String address)
     {
@@ -106,10 +107,11 @@ public class Admin extends User
     
     /**
      *
+     * @param notificationMessage
      */
     @Override
     public void update(String notificationMessage)
     {
-        
+        this.notifications.add(notificationMessage);
     }
 }

@@ -11,17 +11,27 @@ package PatientManagementModel;
  */
 public class AccountNotification extends Notification
 {
+
+    /**
+     *
+     */
     public AccountNotification()
     {
         super();
     }
     
+    /**
+     *
+     */
     public void newPatient()
     {
         this.notificationMessage = "New Patient Request";
         notifyObservers();
     }
     
+    /**
+     *
+     */
     public void removePatient()
     {
         this.notificationMessage = "New Patient Removal Request";

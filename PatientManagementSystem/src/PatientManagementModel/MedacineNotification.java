@@ -11,11 +11,18 @@ package PatientManagementModel;
  */
 public class MedacineNotification extends Notification
 {
+
+    /**
+     *
+     */
     public MedacineNotification()
     {
         super();
     }
     
+    /**
+     *
+     */
     public void medacineUpdate()
     {
         this.notificationMessage = "Medacine Update";

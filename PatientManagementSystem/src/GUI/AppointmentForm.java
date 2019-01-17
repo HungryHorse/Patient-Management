@@ -20,6 +20,8 @@ public class AppointmentForm extends javax.swing.JFrame {
     MedacineManager medacineManager;
     /**
      * Creates new form AppointmentForm
+     * @param appointment
+     * @param medacineManager
      */
     public AppointmentForm(Appointment appointment, MedacineManager medacineManager) 
     {
@@ -29,6 +31,9 @@ public class AppointmentForm extends javax.swing.JFrame {
         appointmentFormCreated();
     }
     
+    /**
+     *
+     */
     public void appointmentFormCreated()
     {
         populateComboBox();
@@ -40,6 +45,9 @@ public class AppointmentForm extends javax.swing.JFrame {
         lblPatientName.setText(appointment.getPatient().getGivenName() + " " + appointment.getPatient().getSurname());
     }
     
+    /**
+     *
+     */
     public void populateComboBox()
     {
         List<Medacine> medacine = medacineManager.getMedacineList();

@@ -11,10 +11,17 @@ import java.util.*;
  */
 public class MedacineManager 
 {
-    private MedacineNotification medacineNotification = new MedacineNotification();
+    private MedacineNotification medacineNotification;
     private List<Medacine> medacineList = new ArrayList<Medacine>();
     private List<Medacine> medacineToRestock = new ArrayList<Medacine>();
 
+    /**
+     *
+     * @param medacineNotification
+     */
+    public MedacineManager(MedacineNotification medacineNotification) {
+        this.medacineNotification = medacineNotification;
+    }
     /**
      *
      * @return
@@ -23,11 +30,20 @@ public class MedacineManager
         return medacineList;
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Medacine> getMedacineToRestock()
     {
         return medacineToRestock;
     }
     
+    /**
+     *
+     * @param medacine
+     * @param Quantity
+     */
     public void givePatientMedacine(Medacine medacine, int Quantity)
     {
         medacine.setStock(medacine.getStock() - Quantity);
@@ -69,6 +85,11 @@ public class MedacineManager
         return null;
     }
     
+    /**
+     *
+     * @param medacine
+     * @param Quantity
+     */
     public void orderMedacine(Medacine medacine, int Quantity)
     {
         medacine.setStock(medacine.getStock() + Quantity);

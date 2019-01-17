@@ -11,6 +11,7 @@ import Users.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,6 +27,7 @@ public class AdminForm extends javax.swing.JFrame {
     private DefaultTableModel tableModel;
     /**
      * Creates new form LoginRegister
+     * @param controller
      */
     public AdminForm(Controller controller) 
     {
@@ -33,6 +35,9 @@ public class AdminForm extends javax.swing.JFrame {
         this.controller = controller;
     }
     
+    /**
+     *
+     */
     public void resetTable()
     {
         String[] cols = {"ID", "Job", "First name", "Surname"};
@@ -43,6 +48,9 @@ public class AdminForm extends javax.swing.JFrame {
         populateTable();
     }
     
+    /**
+     *
+     */
     public void populateTable()
     {
         List<User> doctorList = controller.getDoctors();
@@ -65,6 +73,9 @@ public class AdminForm extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *
+     */
     public void populateComboBox()
     {
         
@@ -81,6 +92,9 @@ public class AdminForm extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *
+     */
     public void populateFeedbackComboBox()
     {
         
@@ -98,21 +112,35 @@ public class AdminForm extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *
+     */
     public void removeByID()
     {
         controller.removeUserByID(txtUserIDToRemove.getText());
     }
     
+    /**
+     *
+     * @param ID
+     */
     public void showGeneratedDoctorID(String ID)
     {
         lblDoctorID.setText(ID);
     }
     
+    /**
+     *
+     * @param ID
+     */
     public void showGeneratedSecretaryID(String ID)
     {
         lblSecretaryID.setText(ID);
     }
     
+    /**
+     *
+     */
     public void setWelcomePage()
     {
         User user = controller.populateWelcomePage();
@@ -123,6 +151,25 @@ public class AdminForm extends javax.swing.JFrame {
         resetTable();
         populateComboBox();
         populateFeedbackComboBox();
+        
+        if(user.getNotifications().size() > 0)
+        {
+            for(String notificationMessage : user.getNotifications())
+            {
+                MessagePopUp(notificationMessage);
+            }
+        }
+        
+        resetTable();
+    }
+    
+    /**
+     *
+     * @param message
+     */
+    public void MessagePopUp(String message)
+    {
+        JOptionPane.showMessageDialog(null, message);
     }
 
     /**
