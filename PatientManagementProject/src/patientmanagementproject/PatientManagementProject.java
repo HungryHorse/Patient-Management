@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package patientmanagementsystem;
-import Users.*;
+package patientmanagementproject;
+
 import PatientManagementModel.*;
-import Controller.*;
 
 /**
  *
  * @author jjbrewer
  */
-public class PatientManagementSystem {
+public class PatientManagementProject {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) 
+    public static void main(String[] args)
     {
+        // TODO code application logic here
         AccountManagement accountManager = new AccountManagement();
         MedacineManager medacineManager = accountManager.getMedacineManager();
-        Controller controller = new Controller(accountManager, medacineManager);
+        Controller.Controller controller  = new Controller.Controller(accountManager, medacineManager);
     }
     
 }
