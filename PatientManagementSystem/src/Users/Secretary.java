@@ -63,7 +63,7 @@ public class Secretary extends User
      *
      * @return
      */
-    public List<User> getRequestedAccounts()
+    public List<Patient> getRequestedAccounts()
     {
         return accountManager.getRequestedAccountCreation();
     }

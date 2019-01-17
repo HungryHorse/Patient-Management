@@ -15,9 +15,10 @@ public class AccountManagement
 {
     private String AdminPass = "AdminPass01";
     private List<Appointment> requestedAppointments = new ArrayList<Appointment>();
-    private List<User> requestedAccountCreation = new ArrayList<User>();
+    private List<Patient> requestedAccountCreation = new ArrayList<Patient>();
     private List<User> requestedAccountTermination = new ArrayList<User>();
     private List<User> accounts = new ArrayList<User>();
+    private List<Doctor> doctors = new ArrayList<Doctor>();
     private AppointmentNotification appointmentNotification = new AppointmentNotification();
     private AccountNotification accountNotification = new AccountNotification();
     private int noOfDoctors = 0;
@@ -33,7 +34,6 @@ public class AccountManagement
     {
         instantiated = true; 
     }
-    
     
     public String getAdminPass() {
         return AdminPass;
@@ -63,7 +63,7 @@ public class AccountManagement
      *
      * @param approvedPatient
      */
-    public void approveAccout(Patient approvedPatient)
+    public void approveAccout(User approvedPatient)
     {
         requestedAccountCreation.remove(approvedPatient);
         accounts.add(approvedPatient);
@@ -76,6 +76,7 @@ public class AccountManagement
     public void createDoctor(Doctor doctor)
     {
         accounts.add(doctor);
+        doctors.add(doctor);
         doctor.setUniqueID(createID("doctor"));
     }
     
@@ -205,6 +206,21 @@ public class AccountManagement
         return userFound;
     }
     
+    public Doctor findDoctorByID(String IDToFind)
+    {
+        Doctor doctorFound = null;
+        
+        for(int i = 0; i < doctors.size(); i++)
+        {
+            if(doctors.get(i).getUniqueID().equals(IDToFind))
+            {
+                doctorFound = doctors.get(i);
+            }
+        }
+        
+        return doctorFound;
+    }
+    
     /**
      *
      * @return
@@ -218,7 +234,7 @@ public class AccountManagement
      *
      * @return
      */
-    public List<User> getRequestedAccountCreation() {
+    public List<Patient> getRequestedAccountCreation() {
         return requestedAccountCreation;
     }
 
@@ -262,9 +278,9 @@ public class AccountManagement
         return secretaries;
     }
     
-    public List<User> getDoctors()
+    public ArrayList<User> getDoctors()
     {
-        List<User> doctors = new ArrayList<User>();
+        ArrayList<User> doctors = new ArrayList<User>();
         for(User user : accounts)
         {
             if(user.getUniqueID().charAt(0) == 'D')
