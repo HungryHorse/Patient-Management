@@ -445,4 +445,9 @@ public class Controller
         medacineManager.addMedacine(newMedacine);
         medacineManager.addMedacineToRestock(newMedacine);
     }
+    
+    public void addReview(Doctor doctor, String review)
+    {
+        accountManager.addReview(doctor, review);
+    }
 }

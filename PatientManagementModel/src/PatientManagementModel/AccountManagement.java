@@ -6,12 +6,17 @@
 package PatientManagementModel;
 import java.util.*;
 import Users.*;
+import java.io.Serializable;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  *
  * @author jbrew
  */
-public class AccountManagement 
+public class AccountManagement implements Serializable 
 {
     private String AdminPass = "AdminPass01";
     private List<Appointment> requestedAppointments = new ArrayList<Appointment>();
@@ -374,5 +379,10 @@ public class AccountManagement
     public List<Patient> getPatients()
     {
         return patients;
+    }
+    
+    public void addReview(Doctor doctor, String reveiw)
+    {
+        doctor.setRating(reveiw);
     }
 }

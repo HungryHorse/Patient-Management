@@ -9,7 +9,9 @@ import Controller.Controller;
 import PatientManagementModel.Appointment;
 import Users.Doctor;
 import Users.User;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -49,6 +51,8 @@ public class PatientForm extends javax.swing.JPanel {
         lblPatientAge.setText(Integer.toString(appointment.getPatient().GetDOB()));
         lblPatientGender.setText(appointment.getPatient().GetGender());
         lblPatientName.setText(appointment.getPatient().getGivenName() + " " + appointment.getPatient().getSurname());
+        
+        resetPatientHistoryTable(user.getUniqueID());
         
         if(user.getNotifications().size() > 0)
         {
@@ -96,6 +100,23 @@ public class PatientForm extends javax.swing.JPanel {
             }
         }
     }
+    
+    public void populateComboBox()
+    {
+        
+        List<User> doctors = controller.getDoctors();
+        List<String> ls = new ArrayList<String>();
+        if(doctors != null)
+        {
+            for(User user : doctors)
+            {
+                ls.add(user.getGivenName() + " " + user.getSurname());
+            }
+
+            cbxDoctors.setModel(new DefaultComboBoxModel(ls.toArray()));
+            cbxDoctorsFeedback.setModel(new DefaultComboBoxModel(ls.toArray()));
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -141,6 +162,11 @@ public class PatientForm extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
+        scoringSlider = new javax.swing.JSlider();
+        txtReview = new javax.swing.JTextField();
+        btnSubmitReview = new javax.swing.JButton();
+        cbxDoctorsFeedback = new javax.swing.JComboBox<>();
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -453,6 +479,65 @@ public class PatientForm extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Prescription", jPanel5);
 
+        scoringSlider.setMajorTickSpacing(1);
+        scoringSlider.setMaximum(5);
+        scoringSlider.setValue(0);
+
+        txtReview.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtReview.setText("Review");
+
+        btnSubmitReview.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnSubmitReview.setText("Submit");
+        btnSubmitReview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitReviewActionPerformed(evt);
+            }
+        });
+
+        cbxDoctorsFeedback.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cbxDoctorsFeedback.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxDoctorsFeedback.setToolTipText("List of doctors");
+        cbxDoctorsFeedback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxDoctorsFeedbackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(367, 367, 367)
+                        .addComponent(btnSubmitReview, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxDoctorsFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(scoringSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtReview, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(32, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(cbxDoctorsFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtReview)
+                    .addComponent(scoringSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(74, 74, 74)
+                .addComponent(btnSubmitReview, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(361, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Review Doctor", jPanel6);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -487,11 +572,27 @@ public class PatientForm extends javax.swing.JPanel {
         controller.proposeAppointment(user, txtDoctor.getText(), txtPatient.getText(), txtDate.getText());
     }//GEN-LAST:event_btnRequestAppointmentActionPerformed
 
+    private void btnSubmitReviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitReviewActionPerformed
+        // TODO add your handling code here:
+        int index = cbxDoctorsFeedback.getSelectedIndex();
+        String ID = String.format("D%04d", index);
+        Doctor doctor = controller.getDoctorByID(ID);
+        String compiledRating;
+        compiledRating = "A rating of " + Integer.toString(scoringSlider.getValue()) + ", text review: " + txtReview.getText();
+        controller.addReview(doctor, compiledRating);
+    }//GEN-LAST:event_btnSubmitReviewActionPerformed
+
+    private void cbxDoctorsFeedbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDoctorsFeedbackActionPerformed
+
+    }//GEN-LAST:event_cbxDoctorsFeedbackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogOff;
     private javax.swing.JButton btnRequestAppointment;
+    private javax.swing.JButton btnSubmitReview;
     private javax.swing.JComboBox<String> cbxDoctors;
+    private javax.swing.JComboBox<String> cbxDoctorsFeedback;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
@@ -501,6 +602,7 @@ public class PatientForm extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -518,11 +620,13 @@ public class PatientForm extends javax.swing.JPanel {
     private javax.swing.JLabel lblPatientName;
     private javax.swing.JLabel lblSurname;
     private javax.swing.JLabel lblUserID;
+    private javax.swing.JSlider scoringSlider;
     private javax.swing.JTable tblPatientHistory;
     private javax.swing.JTextArea txtAreaDocRatings;
     private javax.swing.JTextArea txtAreaNote;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtDoctor;
     private javax.swing.JTextField txtPatient;
+    private javax.swing.JTextField txtReview;
     // End of variables declaration//GEN-END:variables
 }
