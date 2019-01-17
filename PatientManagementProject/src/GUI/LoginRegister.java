@@ -21,6 +21,9 @@ public class LoginRegister extends javax.swing.JFrame {
     {
         initComponents();
         this.controller = controller;
+        MessagePopUp("All user of the same type have the exact same password, for patients P0000, P0001, P0002 the password is password, only P0000 is approved" + "\n"
+                + "for the admin A0000 the password is pass, for the secretary S0000 the password is secretaryPassword" + "\n" +
+                "and for doctors D0000 D0001 D0002 the password is doctorPassword");
     }
     
     /**
