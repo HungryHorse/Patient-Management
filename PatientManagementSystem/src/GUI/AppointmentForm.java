@@ -5,10 +5,7 @@
  */
 package GUI;
 
-import PatientManagementModel.Appointment;
-import PatientManagementModel.Medacine;
-import PatientManagementModel.Perscription;
-import Users.User;
+import PatientManagementModel.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -20,15 +17,15 @@ import javax.swing.DefaultComboBoxModel;
 public class AppointmentForm extends javax.swing.JFrame {
     
     Appointment appointment;
-    List<Medacine> medacine = new ArrayList<Medacine>();
+    MedacineManager medacineManager;
     /**
      * Creates new form AppointmentForm
      */
-    public AppointmentForm(Appointment appointment, List<Medacine> medacine) 
+    public AppointmentForm(Appointment appointment, MedacineManager medacineManager) 
     {
         initComponents();
         this.appointment = appointment;
-        this.medacine = medacine;
+        this.medacineManager = medacineManager;
         appointmentFormCreated();
     }
     
@@ -45,6 +42,7 @@ public class AppointmentForm extends javax.swing.JFrame {
     
     public void populateComboBox()
     {
+        List<Medacine> medacine = medacineManager.getMedacineList();
         List<String> ls = new ArrayList<String>();
         if(medacine != null)
         {
@@ -223,7 +221,7 @@ public class AppointmentForm extends javax.swing.JFrame {
         {
             quantity = (Integer) spnQuantity.getValue();
         }
-        Perscription newPerscription = new Perscription(medacine.get(cmbxMedacine.getSelectedIndex()), appointment.getDoctor(), appointment.getPatient(), quantity, txtDosage.getText());
+        Perscription newPerscription = new Perscription(medacineManager.getMedacineList().get(cmbxMedacine.getSelectedIndex()), appointment.getDoctor(), appointment.getPatient(), quantity, txtDosage.getText());
         appointment.addPerscription(newPerscription);
     }//GEN-LAST:event_btnMakePerscriptionActionPerformed
 

@@ -7,6 +7,7 @@ package GUI;
 
 import Controller.Controller;
 import PatientManagementModel.Appointment;
+import PatientManagementModel.MedacineManager;
 import Users.User;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +22,17 @@ public class DoctorForm extends javax.swing.JFrame {
     
     Controller controller;
     User user;
+    MedacineManager medacineManager;
     Integer appointmentIndex;
+    AppointmentForm appointmentForm;
     private DefaultTableModel tableModel;
     /**
      * Creates new form DoctorForml
      */
-    public DoctorForm(Controller controller) {
+    public DoctorForm(Controller controller, MedacineManager medacineManager) {
         initComponents();
         this.controller = controller;
+        this.medacineManager = medacineManager;
     }
     
     public void setWelcomePage()
@@ -311,6 +315,7 @@ public class DoctorForm extends javax.swing.JFrame {
         List<Appointment> appointments = controller.getDoctorByID(user.getUniqueID()).getAppointments();
         if(appointmentIndex != null)
         {
+            appointmentForm = new AppointmentForm(controller.getDoctorByID(user.getUniqueID()).getAppointments().get(appointmentIndex), medacineManager);
             controller.getDoctorByID(user.getUniqueID()).attendAppointment(appointments.get(appointmentIndex));
         }
     }//GEN-LAST:event_btnAttendAppointmentActionPerformed
