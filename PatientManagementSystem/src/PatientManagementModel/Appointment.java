@@ -46,7 +46,10 @@ public class Appointment
         this.date = date;
         this.proposedBy = proposedBy;
     }
-    
+
+    public String getNotes() {
+        return notes;
+    }    
     
     public User getProposedBy() {
         return proposedBy;

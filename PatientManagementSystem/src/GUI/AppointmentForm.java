@@ -5,19 +5,34 @@
  */
 package GUI;
 
+import PatientManagementModel.Appointment;
+import PatientManagementModel.Medacine;
+import PatientManagementModel.Perscription;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author jjbrewer
  */
 public class AppointmentForm extends javax.swing.JFrame {
-
+    
+    Appointment appointment;
+    List<Medacine> medacine = new ArrayList<Medacine>();
     /**
      * Creates new form AppointmentForm
      */
-    public AppointmentForm() {
+    public AppointmentForm(Appointment appointment, List<Medacine> medacine) 
+    {
         initComponents();
+        this.appointment = appointment;
+        this.medacine = medacine;
     }
-
+    
+    public void appointmentFormCreated()
+    {
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,44 +42,65 @@ public class AppointmentForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lblDoctor = new javax.swing.JLabel();
+        lblDoctorName = new javax.swing.JLabel();
+        lblDoctorAddress = new javax.swing.JLabel();
+        lblPatientAddress = new javax.swing.JLabel();
+        lblPatient = new javax.swing.JLabel();
+        lblPatientName = new javax.swing.JLabel();
+        lblPatientGender = new javax.swing.JLabel();
+        lblPatientAge = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        txtAreaDocRatings = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        txtAreaNote = new javax.swing.JTextArea();
+        btnMakeNote = new javax.swing.JButton();
+        cmbxMedacine = new javax.swing.JComboBox<>();
+        spnQuantity = new javax.swing.JSpinner();
+        txtDosage = new javax.swing.JTextField();
+        btnMakePerscription = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Doctor");
+        lblDoctor.setText("Doctor");
 
-        jLabel2.setText("Name");
+        lblDoctorName.setText("Name");
 
-        jLabel4.setText("Address");
+        lblDoctorAddress.setText("Address");
 
-        jLabel5.setText("Address");
+        lblPatientAddress.setText("Address");
 
-        jLabel6.setText("Patient");
+        lblPatient.setText("Patient");
 
-        jLabel7.setText("Name");
+        lblPatientName.setText("Name");
 
-        jLabel8.setText("Sex");
+        lblPatientGender.setText("Gender");
 
-        jLabel9.setText("Age");
+        lblPatientAge.setText("Age");
 
-        txtAreaDocRatings.setColumns(20);
-        txtAreaDocRatings.setRows(5);
-        jScrollPane3.setViewportView(txtAreaDocRatings);
+        txtAreaNote.setColumns(20);
+        txtAreaNote.setRows(5);
+        jScrollPane3.setViewportView(txtAreaNote);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnMakeNote.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnMakeNote.setText("Make note");
+        btnMakeNote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnMakeNoteActionPerformed(evt);
+            }
+        });
+
+        cmbxMedacine.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cmbxMedacine.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        spnQuantity.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        txtDosage.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtDosage.setText("Dosage");
+
+        btnMakePerscription.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnMakePerscription.setText("Make perscription");
+        btnMakePerscription.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMakePerscriptionActionPerformed(evt);
             }
         });
 
@@ -76,21 +112,19 @@ public class AppointmentForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 456, Short.MAX_VALUE)
+                            .addComponent(lblPatient)
+                            .addComponent(lblPatientName)
+                            .addComponent(lblPatientAddress)
+                            .addComponent(lblPatientGender))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
+                            .addComponent(lblDoctor)
+                            .addComponent(lblDoctorName)
+                            .addComponent(lblDoctorAddress))
                         .addGap(202, 202, 202))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel9)
+                        .addComponent(lblPatientAge)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -98,8 +132,19 @@ public class AppointmentForm extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(btnMakeNote)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(77, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnMakePerscription)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmbxMedacine, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(spnQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDosage, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,81 +152,75 @@ public class AppointmentForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addComponent(lblDoctor)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
+                        .addComponent(lblDoctorName)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5))
+                        .addComponent(lblDoctorAddress))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel9)
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblPatient)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblPatientName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblPatientAddress)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblPatientGender)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addComponent(lblPatientAge)
+                .addGap(39, 39, 39)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMakeNote)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtDosage)
+                    .addComponent(spnQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(cmbxMedacine))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(btnMakePerscription)
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnMakeNoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeNoteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        appointment.makeNote(txtAreaNote.getText());
+    }//GEN-LAST:event_btnMakeNoteActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AppointmentForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AppointmentForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AppointmentForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AppointmentForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void btnMakePerscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakePerscriptionActionPerformed
+        // TODO add your handling code here:
+        int quantity = 0;
+        try
+        {
+            spnQuantity.commitEdit();
         }
-        //</editor-fold>
+        catch(java.text.ParseException e)
+        {
+            quantity = (Integer) spnQuantity.getValue();
+        }
+        Perscription newPerscription = new Perscription(cmbxMedacine.getSelectedIndex(), appointment.getDoctor(), appointment.getPatient(), quantity, txtDosage.getText());
+        appointment.addPerscription(newPerscription);
+    }//GEN-LAST:event_btnMakePerscriptionActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AppointmentForm().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton btnMakeNote;
+    private javax.swing.JButton btnMakePerscription;
+    private javax.swing.JComboBox<String> cmbxMedacine;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea txtAreaDocRatings;
+    private javax.swing.JLabel lblDoctor;
+    private javax.swing.JLabel lblDoctorAddress;
+    private javax.swing.JLabel lblDoctorName;
+    private javax.swing.JLabel lblPatient;
+    private javax.swing.JLabel lblPatientAddress;
+    private javax.swing.JLabel lblPatientAge;
+    private javax.swing.JLabel lblPatientGender;
+    private javax.swing.JLabel lblPatientName;
+    private javax.swing.JSpinner spnQuantity;
+    private javax.swing.JTextArea txtAreaNote;
+    private javax.swing.JTextField txtDosage;
     // End of variables declaration//GEN-END:variables
 }

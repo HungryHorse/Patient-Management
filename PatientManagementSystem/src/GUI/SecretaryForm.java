@@ -85,7 +85,7 @@ public class SecretaryForm extends javax.swing.JFrame {
         {
             for(Appointment appointment : requestedAppointment)
             {
-                Object[] obj = {appointment.getProposedBy(), appointment.getDoctor(), appointment.getPatient(), appointment.getDate()};
+                Object[] obj = {appointment.getProposedBy().getUniqueID(), appointment.getDoctor().getUniqueID(), appointment.getPatient().getUniqueID(), appointment.getDate()};
                 appointmentRequestTableModel.addRow(obj); 
             }
         }
